@@ -4,8 +4,13 @@ import { BooksContext } from "../../contexts/BooksProvider";
 import ProductCard from "../../components/products/ProductCard";
 import Loader from "../../components/loader/Loader";
 import { Transition } from "@headlessui/react";
+
+const ITEMS_PER_PAGE = 20; // Define cuántos productos se deben mostrar por página
+
 const Products = () => {
   const [showLoader, setShowLoader] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1); // Estado para la página actual
+
   const { booksState, allSortsAndFilters } = useContext(BooksContext);
 
   useEffect(() => {
@@ -17,6 +22,30 @@ const Products = () => {
   }, []);
 
   const { booksData } = booksState;
+
+  // Calcular los productos que se deben mostrar en la página actual
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const productsToShow = allSortsAndFilters().slice(
+    startIndex,
+    startIndex + ITEMS_PER_PAGE
+  );
+
+  // Calcular el número total de páginas
+  const totalPages = Math.ceil(allSortsAndFilters().length / ITEMS_PER_PAGE);
+
+  // Funciones para cambiar de página
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
+  };
+
   if (showLoader) return <Loader />;
   return (
     <>
@@ -32,7 +61,7 @@ const Products = () => {
       >
         {booksData && booksData.length > 0 && (
           <div className="grid grid-cols-2 gap-2 lg:grid-cols-4">
-            {allSortsAndFilters().map((product) => (
+            {productsToShow.map((product) => (
               <ProductCard key={product._id} product={product} />
             ))}
           </div>
@@ -45,6 +74,27 @@ const Products = () => {
           </p>
         </div>
       )}
+
+      {/* Controles de paginación */}
+      <div className="flex justify-between mt-4 items-center">
+        <button
+          onClick={handlePrevPage}
+          disabled={currentPage === 1}
+          className="px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded hover:bg-gray-700 disabled:opacity-50"
+        >
+          Anterior
+        </button>
+        <span className="text-lg text-gray-200">
+          Página {currentPage} de {totalPages}
+        </span>
+        <button
+          onClick={handleNextPage}
+          disabled={currentPage === totalPages}
+          className="px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded hover:bg-gray-700 disabled:opacity-50"
+        >
+          Siguiente
+        </button>
+      </div>
     </>
   );
 };
