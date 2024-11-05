@@ -6,6 +6,15 @@ import WishlistButton from "../../components/WishlistButton";
 import Loader from "../../components/loader/Loader";
 import { useNavigate } from "react-router-dom";
 
+// Componente solamente para mostrar la imagen del libro
+const BookThumbnail = ({ imageSrc }) => (
+    <img
+        src={imageSrc}
+        alt="Libro"
+        className="w-full h-full object-cover"
+    />
+);
+
 const ProductOverview = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -32,6 +41,9 @@ const ProductOverview = () => {
     fetchBooksByAuthor(categoryName);
     navigate(`/products/${categoryName}`);
   };
+
+  const relatedBooks = booksData.filter(book => book.uid !== product.uid);
+
   return (
     <section className="overflow-hidden text-gray-100">
       {product && (
@@ -73,6 +85,19 @@ const ProductOverview = () => {
               </div>
             </div>
           </div>
+
+          {/* Grid de Libros Relacionados */}
+          <div className="related-books-grid mt-8">
+            <h2 className="my-2 text-sm tracking-widest text-gray-500 title-font">Libros Relacionados</h2>
+            <div className="grid grid-cols-5 md:grid-cols-6 lg:grid-cols-8 gap-2">
+              {relatedBooks.map(book => (
+                  <div key={book.uid} className="flex items-center justify-center h-60 overflow-hidden bg-gray-200">
+                    <BookThumbnail imageSrc={book.coverImage} />
+                  </div>
+              ))}
+            </div>
+          </div>
+
           <div className="flex flex-wrap mx-auto border-t border-gray-700 lg:max-w-5xl">
             <h2 className="my-2 text-sm tracking-widest text-gray-500 title-font">
               Recent Reviews
