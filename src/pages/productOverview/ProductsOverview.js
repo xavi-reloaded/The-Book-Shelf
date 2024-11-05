@@ -12,12 +12,12 @@ const ProductOverview = () => {
     document.title = "Product Overview | The Book Shelf";
     setTimeout(() => {
       setShowLoader(false);
-    }, 2000);
+    }, 100);
   }, []);
   const {
     booksState: { booksData },
   } = useContext(BooksContext);
-  const product = booksData.find((ele) => ele._id === id) ?? {};
+  const product = booksData.find((ele) => ele.uid === id) ?? {};
 
   if (showLoader) return <Loader />;
 
@@ -29,12 +29,12 @@ const ProductOverview = () => {
             <img
               alt={product.title}
               className="object-cover object-center w-full rounded h-1/2 lg:w-1/4"
-              src={product.imgUrl}
+              src={product.coverImage}
             />
 
             <div className="w-full mt-6 lg:w-2/3 lg:pl-10 lg:py-6 lg:mt-0">
               <h2 className="relative text-sm tracking-widest text-gray-500 title-font">
-                {product.author}
+                {product.creator}
                 <div className="absolute right-0 sm:bottom-4 sm:relative bottom-24">
                   <WishlistButton product={product} />
                 </div>
@@ -45,23 +45,17 @@ const ProductOverview = () => {
               <div className="flex mb-4">
                 <span className="flex items-center">
                   <span className="text-xs mr-3 font-semibold px-2.5 py-0.5 rounded bg-cyan-900 bg-opacity-80 text-gray-100">
-                    {product.rating}
+                    0
                   </span>
                   |
                   <span className="ml-3 text-gray-600">
-                    {product.pages} Pages
+                    100 Pages
                   </span>
                 </span>
               </div>
               <p className="leading-relaxed">{product.description}</p>
 
               <div className="flex items-baseline my-4">
-                <span className="text-2xl before:mr-1 before:content-['₹'] font-medium text-gray-100 title-font">
-                  {product.price - product.discount}
-                </span>
-                <span className="text-md ml-2 before:mr-1 line-through before:content-['₹'] font-medium text-gray-500 title-font">
-                  {product.price}
-                </span>
                 <div className="flex ml-auto">
                   <AddToCartButton product={product} />
                 </div>

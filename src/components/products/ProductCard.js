@@ -8,11 +8,11 @@ const ProductCard = ({ product, fromWishlist }) => {
   const navigate = useNavigate();
   const { removeWishlistHandler } = useContext(BooksContext);
 
-  const { coverImage, price, rating, title, _id, discount } = product;
+  const { coverImage, price, rating, title, uid, discount } = product;
 
   const removeFromWishList = (e, product) => {
     e.stopPropagation();
-    removeWishlistHandler(product._id);
+    removeWishlistHandler(product.uid);
   };
 
   const productOverview = (id) => {
@@ -21,7 +21,7 @@ const ProductCard = ({ product, fromWishlist }) => {
 
   return (
     <div
-      onClick={(e) => productOverview(_id)}
+      onClick={(e) => productOverview(uid)}
       className="flex flex-col items-center self-start border border-gray-900 rounded-lg hover:bg-gray-800 hover:border hover:border-gray-700 "
     >
       <div className="relative">
