@@ -31,7 +31,7 @@ const Products = () => {
         leaveTo="opacity-0"
       >
         {booksData && booksData.length > 0 && (
-          <div className="grid grid-cols-2 gap-2 lg:grid-cols-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {booksData.map((product) => (
               <ProductCard key={product.uid} product={product} />
             ))}

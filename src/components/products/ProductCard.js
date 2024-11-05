@@ -26,7 +26,7 @@ const ProductCard = ({ product, fromWishlist }) => {
     >
       <div className="relative">
         <img
-          className="w-40 h-56 p-4 rounded-t-lg lg:w-56 lg:h-80"
+          className="w-40 h-56 p-4 rounded-t-lg lg:w-56 lg:h-50"
           src={coverImage}
           alt={title}
         />
@@ -57,12 +57,12 @@ const ProductCard = ({ product, fromWishlist }) => {
       <div className="flex flex-col flex-wrap content-between justify-center px-5 pb-5 align-middle">
         <h5
           title={title}
-          className="w-32 h-12 text-base font-semibold tracking-tight text-gray-100 lg:w-48 lg:text-lg lg:h-14 line-clamp-2"
+          className="w-32 h-12 text-xs tracking-tight text-gray-100 lg:w-35 lg:text-lg lg:h-14 line-clamp-2"
         >
           {title}
         </h5>
-        <div className="flex flex-col space-y-2">
-          <AddToCartButton product={product} />
+        <div className="flex flex-col space-y-5">
+          {/*<AddToCartButton product={product} />*/}
         </div>
       </div>
     </div>

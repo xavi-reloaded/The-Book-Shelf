@@ -17,7 +17,7 @@ const AddToCartButton = ({ product }) => {
     }
   };
 
-  const { addedToCart, _id } = product;
+  const { addedToCart, uid } = product;
   const handleAddToCart = (e, product) => {
     e.stopPropagation();
     if (checkForAuth()) return;
@@ -25,18 +25,18 @@ const AddToCartButton = ({ product }) => {
       navigate("/cart");
       return;
     }
-    setButtonDisable(product._id);
+    setButtonDisable(product.uid);
     addToCartHandler(product);
   };
   return (
     <button
-      disabled={buttonDisabled === _id}
-      id={_id}
+      disabled={buttonDisabled === uid}
+      id={uid}
       onClick={(e) => handleAddToCart(e, product)}
       type="button"
       className="w-full px-5 py-2.5 text-xs lg:text-sm font-medium text-center text-gray-100 rounded-lg bg-cyan-900 focus:ring-4 focus:outline-none hover:bg-cyan-950 focus:ring-cyan-950"
     >
-      {buttonDisabled === _id && (
+      {buttonDisabled === uid && (
         <svg
           aria-hidden="true"
           role="status"
@@ -56,7 +56,7 @@ const AddToCartButton = ({ product }) => {
         </svg>
       )}
 
-      {buttonDisabled !== _id && (
+      {buttonDisabled !== uid && (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -72,7 +72,7 @@ const AddToCartButton = ({ product }) => {
           />
         </svg>
       )}
-      {addedToCart ? "GO TO CART" : "ADD TO CART"}
+      {addedToCart ? "GO" : "ADD"}
     </button>
   );
 };
