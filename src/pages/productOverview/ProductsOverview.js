@@ -4,9 +4,11 @@ import { useParams } from "react-router";
 import { BooksContext } from "../../contexts/BooksProvider";
 import WishlistButton from "../../components/WishlistButton";
 import Loader from "../../components/loader/Loader";
+import { useNavigate } from "react-router-dom";
 
 const ProductOverview = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [showLoader, setShowLoader] = useState(true);
   useEffect(() => {
     document.title = "Product Overview | The Book Shelf";
@@ -15,12 +17,21 @@ const ProductOverview = () => {
     }, 100);
   }, []);
   const {
-    booksState: { booksData },
+    booksState: { booksData },fetchBooksByCategory,fetchBooksByAuthor
   } = useContext(BooksContext);
   const product = booksData.find((ele) => ele.uid === id) ?? {};
 
   if (showLoader) return <Loader />;
 
+
+  const handleCategoryClick = (categoryName) => {
+    fetchBooksByCategory(categoryName);
+    navigate(`/products/${categoryName}`);
+  };
+  const handleAuthorClick = (categoryName) => {
+    fetchBooksByAuthor(categoryName);
+    navigate(`/products/${categoryName}`);
+  };
   return (
     <section className="overflow-hidden text-gray-100">
       {product && (
@@ -44,12 +55,12 @@ const ProductOverview = () => {
               </h1>
               <div className="flex mb-4">
                 <span className="flex items-center">
-                  <span className="text-xs mr-3 font-semibold px-2.5 py-0.5 rounded bg-cyan-900 bg-opacity-80 text-gray-100">
-                    0
+                  <span className="text-xs mr-3 font-semibold px-2.5 py-0.5 rounded bg-cyan-900 bg-opacity-80 text-gray-100" onClick={()=>handleCategoryClick(product.categories)}>
+                    {product.categories}
                   </span>
                   |
-                  <span className="ml-3 text-gray-600">
-                    100 Pages
+                  <span className="ml-3 text-gray-300" onClick={()=>handleAuthorClick(product.author)}>
+                    {product.author}
                   </span>
                 </span>
               </div>

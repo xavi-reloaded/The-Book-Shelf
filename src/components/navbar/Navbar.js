@@ -18,7 +18,7 @@ const Navbar = () => {
   } = useContext(AuthContext);
 
   const {
-    booksState: { wishlist, cart },
+    booksState: { wishlist, cart },handleFilterReset
   } = useContext(BooksContext);
 
 
@@ -49,6 +49,7 @@ const Navbar = () => {
                 <div className="flex justify-end w-3/4">
                   <div className="hidden lg:block">
                     <NavLink
+                        onClick={()=>{handleFilterReset()}}
                       to="products"
                       className="flex items-center p-2 -m-2 text-gray-100 rounded-md hover:bg-gray-700 group"
                     >
@@ -153,9 +154,10 @@ const Navbar = () => {
             <SearchBar />{" "}
             <span className="flex justify-end p-2">
               <NavLink
+
                 to="products"
                 className="flex items-center p-2 -m-2 text-gray-100 rounded-md hover:bg-gray-700 group"
-              > <span className="hidden md:block">Explora</span>
+              > <span className="hidden md:block" onClick={()=>handleFilterReset()}>Explora</span>
                 <MdOutlineExplore className="flex-shrink-0 w-6 h-6 text-gray-100 sm:ml-2 group-hover:text-white" />
                 <span className="sr-only">Explora libros</span>
               </NavLink>

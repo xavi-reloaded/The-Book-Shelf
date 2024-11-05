@@ -2,13 +2,14 @@ import { useContext, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { BooksContext } from '../../contexts/BooksProvider'
 import CategoryCard from '../../components/CategoryCard'
+import CategoryCloud from "./CategoryCloud";
 const links = [
     { name: 'Explora', to: 'products' },
 ]
 
 
  const Home=()=> {
-    const {booksState}=useContext(BooksContext)
+    const {booksState,handleFilterReset}=useContext(BooksContext)
     useEffect(()=>{
         document.title="Home | The Book Shelf"
     },[])
@@ -61,16 +62,16 @@ const links = [
                             ))}
                         </div>
 
-                        {/* <div className="grid grid-cols-1 text-base font-semibold leading-7 text-gray-100 gap-x-8 gap-y-6 sm:grid-cols-2 md:flex lg:gap-x-10">
+                        <div className="pb-80">
+                            <CategoryCloud />
+                        </div>
 
+                        {/* <div className="grid grid-cols-1 text-base font-semibold leading-7 text-gray-100 gap-x-8 gap-y-6 sm:grid-cols-2 md:flex lg:gap-x-10">
                                 <p >
                                      Categories
                                 </p>
-
                         </div> */}
-                        <dl className="grid grid-cols-2 gap-6 mt-8 sm:mt-20 lg:grid-cols-4">
-                            {booksState.categories.length>0 && booksState.categories.map((category) => <CategoryCard key={category._id} category={category}/>)}
-                        </dl>
+
                     </div>
                 </div>
             </div>

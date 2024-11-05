@@ -14,7 +14,6 @@ const SearchBar = () => {
   const handleEnterPress = (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
-      console.log('Se presionó Enter');
       fetchBooksByAuthorApply();
       navigate(`/products`);
     }

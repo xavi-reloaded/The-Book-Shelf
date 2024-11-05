@@ -9,12 +9,15 @@ import Range from "../components/products/filters/Range";
 import { Outlet, useParams } from "react-router-dom";
 import { BooksContext } from "../contexts/BooksProvider";
 import { FILTERS_ACTION } from "../constants/dispatchTypes";
+import { useNavigate } from "react-router-dom";
 const ProductLayout = () => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const {
     filtersState: { priceSlider, ratingSlider },
     filtersDispatch,
-    handleFilterReset,
+      handleFilterReset,
+    paging,
+    fetchProducts
   } = useContext(BooksContext);
 
   const { category } = useParams();
@@ -51,6 +54,7 @@ const ProductLayout = () => {
     min:100,
     dispatchType: FILTERS_ACTION.UPDATE_PRICE_SLIDER,
   };
+  const navigate = useNavigate();
   return (
     <div className="mx-auto md:max-w-2xl lg:max-w-7xl">
       {/* Mobile filter dialog */}
@@ -108,15 +112,6 @@ const ProductLayout = () => {
                 </div>
 
                 {/* Filters */}
-                <form className="mt-4 border-t border-gray-200">
-                  <h3 className="sr-only">Categorias</h3>
-                  <div className="px-4 mt-12 space-y-2">
-                    {/*<Range {...priceRange} />*/}
-                    {/*<Radio />*/}
-                    <Range {...ratingsRange} />
-                    <Checkbox />
-                  </div>
-                </form>
               </Dialog.Panel>
             </Transition.Child>
           </div>
@@ -126,7 +121,24 @@ const ProductLayout = () => {
       <main className="relative px-4 mx-auto md:ml-36 mt-18 max-w-7xl sm:px-6 lg:px-8">
         <div className="sticky z-20 flex items-baseline justify-between pt-40 pb-8 bg-gray-900 sm:top-16 lg:top-0 md:pt-24 mb-30">
           <h1 className="font-bold tracking-tight text-gray-100 md:text-xl lg:text-4xl">
-            Librakens
+            {category||'Todos los libros'}
+            {paging.previous && <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  paging.previous && fetchProducts(`http://localhost:3000${paging.previous}`)
+                }}
+                disabled={!paging.previous}
+                className="px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded hover:bg-gray-700 disabled:opacity-50"
+            >
+              Anterior
+            </button>}
+            { paging.previous && <button
+                onClick={() => paging.next && fetchProducts(`http://localhost:3000${paging.next}`)}
+                disabled={!paging.next}
+                className="px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded hover:bg-gray-700 disabled:opacity-50"
+            >
+              Siguiente
+            </button>}
           </h1>
 
           <div className="flex items-center">
@@ -162,7 +174,10 @@ const ProductLayout = () => {
                   </span>
                   <span className="hidden w-px h-6 bg-gray-700 lg:block" aria-hidden="true" />
                   <button
-                    onClick={handleFilterReset}
+                    onClick={()=>{
+                      handleFilterReset()
+                      navigate(`/products`);
+                    }}
                     className="flex items-center p-2 text-sm text-gray-400 rounded-lg hover:bg-gray-50 hover:bg-opacity-10"
                     type="button"
                   >
@@ -175,7 +190,7 @@ const ProductLayout = () => {
                   {/*<Range {...priceRange} />*/}
                   {/*<Radio />*/}
                   <Range {...ratingsRange} />
-                  <Checkbox />
+                  {/*<Checkbox />*/}
                 </div>
               </form>
             </div>
