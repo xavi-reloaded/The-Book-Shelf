@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { BooksContext } from '../../contexts/BooksProvider'
 import CategoryCard from '../../components/CategoryCard'
 const links = [
-    { name: 'Explore', to: 'products' },
+    { name: 'Explora', to: 'products' },
 ]
 
 

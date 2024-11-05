@@ -9,6 +9,9 @@ const books = (state, { type, payload }) => {
     case BOOKS_ACTIONS.SAVE_BOOKS_DATA:
       return { ...state, booksData: payload };
 
+    case BOOKS_ACTIONS.SAVE_BOOKS_DATA_SEARCH:
+      return { ...state, booksSearchData: payload };
+
     case BOOKS_ACTIONS.SAVE_WISHLIST:
       return { ...state, wishlist: payload };
 

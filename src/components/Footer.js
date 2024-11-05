@@ -5,7 +5,7 @@ const Footer = () => {
 
         <footer className="inset-x-0 bottom-0 h-16 mt-auto bg-gray-900">
             <div className="w-full max-w-screen-xl p-4 mx-auto text-center md:flex md:items-center md:justify-between">
-                <span className="text-sm font-semibold text-gray-100">No ©, Feel Free to Replicate.
+                <span className="text-sm font-semibold text-gray-100">No ©, Copia lo que quieras y sin publicidad.
                 </span>
                 <ul className="flex flex-wrap items-center justify-center mt-3 text-sm font-medium text-gray-100 md:justify-normal sm:mt-0">
                     <li>

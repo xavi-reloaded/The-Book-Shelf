@@ -34,8 +34,8 @@ const ProductLayout = () => {
     dispatch: filtersDispatch,
     heading:
       ratingSlider === 5
-        ? `Ratings (${ratingSlider})`
-        : `Ratings (${ratingSlider} and above)`,
+        ? `Calificación (${ratingSlider})`
+        : `Calificación (${ratingSlider} y superior)`,
     max: 5,
     min:1,
     step: 0.5,
@@ -95,7 +95,7 @@ const ProductLayout = () => {
                 </div>
 
                 <div className="flex items-center justify-between px-4 mt-8">
-                  <h2 className="text-lg font-medium text-gray-100">Filters</h2>
+                  <h2 className="text-lg font-medium text-gray-100">Filtros</h2>
                   <span className="w-px h-6 bg-gray-700" aria-hidden="true" />
                   <button
                     onClick={handleFilterReset}
@@ -103,16 +103,16 @@ const ProductLayout = () => {
                     type="button"
                   >
                     {" "}
-                    <XMarkIcon className="w-4 h-4 mr-2" /> Clear All
+                    <XMarkIcon className="w-4 h-4 mr-2" /> Resetea
                   </button>
                 </div>
 
                 {/* Filters */}
                 <form className="mt-4 border-t border-gray-200">
-                  <h3 className="sr-only">Categories</h3>
+                  <h3 className="sr-only">Categorias</h3>
                   <div className="px-4 mt-12 space-y-2">
-                    <Range {...priceRange} />
-                    <Radio />
+                    {/*<Range {...priceRange} />*/}
+                    {/*<Radio />*/}
                     <Range {...ratingsRange} />
                     <Checkbox />
                   </div>
@@ -126,7 +126,7 @@ const ProductLayout = () => {
       <main className="relative px-4 mx-auto md:ml-36 mt-18 max-w-7xl sm:px-6 lg:px-8">
         <div className="sticky z-20 flex items-baseline justify-between pt-40 pb-8 bg-gray-900 sm:top-16 lg:top-0 md:pt-24 mb-30">
           <h1 className="font-bold tracking-tight text-gray-100 md:text-xl lg:text-4xl">
-            Books
+            Librakens
           </h1>
 
           <div className="flex items-center">
@@ -137,7 +137,7 @@ const ProductLayout = () => {
               className="p-2 ml-4 -m-2 text-gray-400 hover:text-gray-500 sm:ml-6 md:hidden"
               onClick={() => setMobileFiltersOpen(true)}
             >
-              <span className="sr-only">Filters</span>
+              <span className="sr-only">Filtros</span>
               <FunnelIcon className="w-5 h-5" aria-hidden="true" />
             </button>
           </div>
@@ -145,7 +145,7 @@ const ProductLayout = () => {
 
         <section aria-labelledby="products-heading" className="pt-6 pb-24">
           <h2 id="products-heading" className="sr-only">
-            Products
+            Libros
           </h2>
 
           {/* Filters */}
@@ -158,7 +158,7 @@ const ProductLayout = () => {
               <form className="hidden md:block">
                 <div className="flex items-center justify-between my-4 text-gray-100 ">
                   <span className="font-bold tracking-wide md:text-md lg:text-2xl">
-                    Filters
+                    Filtros
                   </span>
                   <span className="hidden w-px h-6 bg-gray-700 lg:block" aria-hidden="true" />
                   <button
@@ -167,13 +167,13 @@ const ProductLayout = () => {
                     type="button"
                   >
                     {" "}
-                    <XMarkIcon className="w-4 h-4 mr-2" /> Clear All
+                    <XMarkIcon className="w-4 h-4 mr-2" /> Restaura
                   </button>
                 </div>
-                <h3 className="sr-only">Categories</h3>
+                <h3 className="sr-only">Categorias</h3>
                 <div className="mt-6 space-y-4">
-                  <Range {...priceRange} />
-                  <Radio />
+                  {/*<Range {...priceRange} />*/}
+                  {/*<Radio />*/}
                   <Range {...ratingsRange} />
                   <Checkbox />
                 </div>

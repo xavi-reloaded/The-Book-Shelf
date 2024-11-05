@@ -1,6 +1,7 @@
 export const BOOKS_ACTIONS = {
   SAVE_CATEGORY: "save_category",
   SAVE_BOOKS_DATA: "save_books_data",
+  SAVE_BOOKS_DATA_SEARCH: "save_books_data_search",
   SAVE_CART: "save_cart",
   SAVE_WISHLIST: "save_wishlist",
   WISHLISTED: "wishlisted",

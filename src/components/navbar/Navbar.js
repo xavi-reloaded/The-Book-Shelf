@@ -52,7 +52,7 @@ const Navbar = () => {
                       to="products"
                       className="flex items-center p-2 -m-2 text-gray-100 rounded-md hover:bg-gray-700 group"
                     >
-                      Explore
+                      Explora
                       <MdOutlineExplore className="flex-shrink-0 w-6 h-6 ml-2 text-gray-100 group-hover:text-white" />
                       <span className="sr-only">products explore</span>
                     </NavLink>
@@ -149,15 +149,15 @@ const Navbar = () => {
           </div>
           {/* Search bar for below computer */}
           <div className="p-2 bg-gray-800 rounded-lg lg:hidden">
-       
+
             <SearchBar />{" "}
             <span className="flex justify-end p-2">
               <NavLink
                 to="products"
                 className="flex items-center p-2 -m-2 text-gray-100 rounded-md hover:bg-gray-700 group"
-              > <span className="hidden md:block">Explore</span>
+              > <span className="hidden md:block">Explora</span>
                 <MdOutlineExplore className="flex-shrink-0 w-6 h-6 text-gray-100 sm:ml-2 group-hover:text-white" />
-                <span className="sr-only">products explore</span>
+                <span className="sr-only">Explora libros</span>
               </NavLink>
             </span>
           </div>

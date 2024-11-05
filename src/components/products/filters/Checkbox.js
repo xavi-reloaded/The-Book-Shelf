@@ -24,7 +24,7 @@ const Checkbox = () => {
   };
   return (
     <fieldset className="pb-4">
-      <legend className="text-sm text-gray-100">Category</legend>
+      <legend className="text-sm text-gray-100">Categoria</legend>
       <ul className="text-sm font-medium text-gray-100">
         {categories.map(({ categoryName, _id }) => (
           <li key={_id} className="w-full cursor-pointer">
