@@ -33,7 +33,7 @@ const Products = () => {
         {booksData && booksData.length > 0 && (
           <div className="grid grid-cols-2 gap-2 lg:grid-cols-4">
             {booksData.map((product) => (
-              <ProductCard key={product._id} product={product} />
+              <ProductCard key={product.uid} product={product} />
             ))}
           </div>
         )}

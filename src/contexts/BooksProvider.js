@@ -2,7 +2,8 @@ import { createContext, useReducer, useState, useEffect } from "react";
 import books from "./reducers/Books";
 import filters from "./reducers/Filters";
 import {filtersInitialState} from "./initialStates/FilterInitialState";
-import {booksInitialState} from "./initialStates/BooksInitialState"; // Assumes a getProducts function that can fetch data
+import {booksInitialState} from "./initialStates/BooksInitialState";
+import {BOOKS_ACTIONS} from "../constants/dispatchTypes";
 
 export const BooksContext = createContext();
 
@@ -11,6 +12,8 @@ const BooksProvider = ({ children }) => {
   const [booksState, booksDispatch] = useReducer(books, booksInitialState);
   const [paging, setPaging] = useState({ next: null, previous: null });
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
+  const { booksData } = booksState;
 
   useEffect(() => {
     fetchProducts();
@@ -21,7 +24,7 @@ const BooksProvider = ({ children }) => {
     try {
       const response = await fetch(url);
       const { data, paging } = await response.json();
-      booksDispatch({ type: "SAVE_BOOKS_DATA", payload: data });
+      booksDispatch({ type: BOOKS_ACTIONS.SAVE_BOOKS_DATA, payload: data });
       setPaging(paging);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -30,7 +33,12 @@ const BooksProvider = ({ children }) => {
     }
   };
 
-  const searchProductsHandler = () => []
+  const searchProductsHandler = () =>
+      searchTerm === ""
+          ? booksData
+          : booksData.filter((books) =>
+              books.title.toLowerCase().includes(searchTerm.toLowerCase())
+          );
   const removeWishlistHandler = () => []
   const handleWishlistToggle = () => []
   const addToCartHandler = () => []

@@ -8,7 +8,7 @@ const ProductCard = ({ product, fromWishlist }) => {
   const navigate = useNavigate();
   const { removeWishlistHandler } = useContext(BooksContext);
 
-  const { imgUrl, price, rating, title, _id, discount } = product;
+  const { coverImage, price, rating, title, _id, discount } = product;
 
   const removeFromWishList = (e, product) => {
     e.stopPropagation();
@@ -27,7 +27,7 @@ const ProductCard = ({ product, fromWishlist }) => {
       <div className="relative">
         <img
           className="w-40 h-56 p-4 rounded-t-lg lg:w-56 lg:h-80"
-          src={imgUrl}
+          src={coverImage}
           alt={title}
         />
         {!fromWishlist && <WishlistButton product={product} />}
@@ -62,16 +62,6 @@ const ProductCard = ({ product, fromWishlist }) => {
           {title}
         </h5>
         <div className="flex flex-col space-y-2">
-          <div className="text-lg lg:text-2xl relative before:mr-1 before:content-['₹'] font-bold text-gray-100">
-            {price - discount}
-            <p className="text-xs sm:text-sm  before:mr-1 before:content-['₹'] line-through text-gray-200">
-              {price}
-            </p>
-
-            <span className=" absolute text-xs right-0 bottom-1.5 font-semibold px-2.5 py-0.5 rounded bg-cyan-900 bg-opacity-80 text-gray-100">
-              {rating}
-            </span>
-          </div>
           <AddToCartButton product={product} />
         </div>
       </div>
