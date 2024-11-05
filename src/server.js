@@ -89,6 +89,7 @@ export function makeServer({ environment = "development" } = {}) {
         "/user/wishlist/:productId",
         removeItemFromWishlistHandler.bind(this)
       );
+      this.passthrough("http://localhost:3000/**");
     },
   });
 }

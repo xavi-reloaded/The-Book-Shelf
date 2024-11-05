@@ -1,6 +1,8 @@
 import { createContext, useReducer, useState, useEffect } from "react";
-import { books, filters } from "./reducers"; // Assuming you have reducers to manage states
-import { getProducts } from "./api"; // Assumes a getProducts function that can fetch data
+import books from "./reducers/Books";
+import filters from "./reducers/Filters";
+import {filtersInitialState} from "./initialStates/FilterInitialState";
+import {booksInitialState} from "./initialStates/BooksInitialState"; // Assumes a getProducts function that can fetch data
 
 export const BooksContext = createContext();
 
@@ -28,6 +30,19 @@ const BooksProvider = ({ children }) => {
     }
   };
 
+  const searchProductsHandler = () => []
+  const removeWishlistHandler = () => []
+  const handleWishlistToggle = () => []
+  const addToCartHandler = () => []
+  const removeFromCartHandler = () => []
+  const moveToWishlistHandler = () => []
+  const cartItemQuantityHandler = () => []
+  const changeCategoryHandler = () => []
+  const allSortsAndFilters = () => []
+  const handleFilterReset = () => []
+  const changePriceSort = () => []
+  const saveOrderHistory = () => []
+
   return (
     <BooksContext.Provider
       value={{
@@ -37,6 +52,18 @@ const BooksProvider = ({ children }) => {
         booksDispatch,
         paging,
         fetchProducts, // Expose function to update products with pagination
+          removeWishlistHandler,
+          handleWishlistToggle,
+          addToCartHandler,
+          removeFromCartHandler,
+          moveToWishlistHandler,
+          cartItemQuantityHandler,
+          searchProductsHandler,
+          changeCategoryHandler,
+          allSortsAndFilters,
+          handleFilterReset,
+          changePriceSort,
+          saveOrderHistory,
         loading,
       }}
     >
