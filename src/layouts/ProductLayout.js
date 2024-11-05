@@ -27,6 +27,8 @@ const ProductLayout = () => {
       });
   }, [category, filtersDispatch]);
 
+
+
   const ratingsRange = {
     value: ratingSlider,
     dispatch: filtersDispatch,

@@ -4,6 +4,7 @@ import filters from "./reducers/Filters";
 import {filtersInitialState} from "./initialStates/FilterInitialState";
 import {booksInitialState} from "./initialStates/BooksInitialState";
 import {BOOKS_ACTIONS} from "../constants/dispatchTypes";
+import {categories} from "../backend/db/categories";
 
 export const BooksContext = createContext();
 
@@ -25,6 +26,7 @@ const BooksProvider = ({ children }) => {
       const response = await fetch(url);
       const { data, paging } = await response.json();
       booksDispatch({ type: BOOKS_ACTIONS.SAVE_BOOKS_DATA, payload: data });
+      booksDispatch({ type: BOOKS_ACTIONS.SAVE_CATEGORY, payload: categories,});
       setPaging(paging);
     } catch (error) {
       console.error("Error fetching data:", error);

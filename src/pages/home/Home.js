@@ -46,10 +46,10 @@ const links = [
                 </div>
                 <div className="px-6 mx-auto max-w-7xl lg:px-8">
                     <div className="max-w-2xl mx-auto lg:mx-0">
-                    <h2 className="text-4xl font-bold tracking-tight text-gray-100 sm:text-6xl">THE <span className="text-transparent bg-clip-text bg-gradient-to-tr from-[#ff4694] to-[#776fff] ">BOOK SHELF</span></h2>
+                    <h2 className="text-4xl font-bold tracking-tight text-gray-100 sm:text-6xl">THE <span className="text-transparent bg-clip-text bg-gradient-to-tr from-[#ff4694] to-[#776fff] ">BOOK FLIPANTE</span></h2>
 
                         <p className="mt-6 text-lg leading-8 text-gray-300">
-                        Uncover a World of Literary Delights: Explore and Shop the Vast Library of Our E-Commerce Bookstore
+                        Descubre un mundo de literatura gratuita. No es que sea muy legal pero que viva mi polla morena.
                         </p>
                     </div>
                     <div className="max-w-2xl mx-auto mt-10 lg:mx-0 lg:max-w-none">
@@ -60,13 +60,13 @@ const links = [
                                 </NavLink>
                             ))}
                         </div>
-                        
+
                         {/* <div className="grid grid-cols-1 text-base font-semibold leading-7 text-gray-100 gap-x-8 gap-y-6 sm:grid-cols-2 md:flex lg:gap-x-10">
-                          
+
                                 <p >
                                      Categories
                                 </p>
-                            
+
                         </div> */}
                         <dl className="grid grid-cols-2 gap-6 mt-8 sm:mt-20 lg:grid-cols-4">
                             {booksState.categories.length>0 && booksState.categories.map((category) => <CategoryCard key={category._id} category={category}/>)}

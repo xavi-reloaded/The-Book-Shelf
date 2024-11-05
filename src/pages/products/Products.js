@@ -16,6 +16,7 @@ const Products = () => {
     document.title = "Products | The Book Shelf";
   }, []);
 
+
   if (loading) return <Loader />;
 
   return (
