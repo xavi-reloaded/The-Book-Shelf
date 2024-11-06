@@ -132,7 +132,7 @@ const ProductLayout = () => {
             >
               Anterior
             </button>}
-            { paging.previous && <button
+            { paging.next && <button
                 onClick={() => paging.next && fetchProducts(`http://localhost:3000${paging.next}`)}
                 disabled={!paging.next}
                 className="px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded hover:bg-gray-700 disabled:opacity-50"
