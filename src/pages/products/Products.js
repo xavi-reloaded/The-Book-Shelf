@@ -50,8 +50,8 @@ const Products = () => {
       {/* Pagination controls */}
       <div className="flex justify-between mt-4 items-center">
         <button
-          onClick={() => paging.previous && fetchProducts(`http://localhost:3000${paging.previous}`)}
-          disabled={!paging.previous}
+          onClick={() => paging && paging.previous && fetchProducts(`http://localhost:3000${paging.previous}`)}
+          disabled={!paging?.previous}
           className="px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded hover:bg-gray-700 disabled:opacity-50"
         >
           Anterior
@@ -60,8 +60,8 @@ const Products = () => {
           Página actual basada en servidor
         </span>
         <button
-          onClick={() => paging.next && fetchProducts(`http://localhost:3000${paging.next}`)}
-          disabled={!paging.next}
+          onClick={() => paging && paging.next && fetchProducts(`http://localhost:3000${paging.next}`)}
+          disabled={!paging?.next}
           className="px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded hover:bg-gray-700 disabled:opacity-50"
         >
           Siguiente
