@@ -13,6 +13,13 @@ const links = [
     useEffect(()=>{
         document.title="Home | The Book Shelf"
     },[])
+
+    const [authorInitials, setAuthorInitials] = useState(authorsData);
+   const [selectedInitial, setSelectedInitial] = useState(null);
+   const handleInitialClick = (initial) => {
+     setSelectedInitial(initial);
+   };
+     
     return (
         <div className='relative flex flex-col'>
             <div className="relative py-24 mt-16 overflow-hidden bg-gray-900 lg:mt-0 isolate sm:pt-32 sm:pb-16">
@@ -46,7 +53,36 @@ const links = [
                     />
                 </div>
             </div>
-            {/* <Banner /> */}
+
+            <div className='relative flex flex-col'>
+              {/* Índice de letras */}
+              <div className="flex justify-center space-x-2 pt-4">
+                {Object.keys(authorInitials).sort().map((initial) => (
+                  <button
+                    key={initial}
+                    onClick={() => handleInitialClick(initial)}
+                    className={`px-2 py-1 text-lg font-semibold ${
+                      selectedInitial === initial ? 'bg-blue-500 text-white' : 'bg-gray-200'
+                    }`}>
+                    {initial}
+                  </button>
+                ))}
+              </div>
+
+              {/* Lista de autores */}
+              <div className="pt-6">
+                {selectedInitial && (
+                  <div className="grid grid-cols-2 gap-4">
+                    {authorInitials[selectedInitial].map(author => (
+                      <div key={author.name} className="bg-gray-50 p-2 rounded shadow">
+                        {author.name} ({author.count})
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+            
         </div>
     )
 }
