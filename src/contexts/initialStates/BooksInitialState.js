@@ -5,5 +5,6 @@ export const booksInitialState={
     wishlist:[],
     cart:[],
     orders:[],
-    authors:{}
+    authors:{},
+    series:[]
 }

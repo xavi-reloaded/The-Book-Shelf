@@ -15,7 +15,7 @@ const ProductLayout = () => {
   const {
     filtersState: { priceSlider, ratingSlider },
     filtersDispatch,
-      handleFilterReset,
+    handleFilterReset,
     paging,
     fetchProducts
   } = useContext(BooksContext);

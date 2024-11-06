@@ -6,6 +6,8 @@ const books = (state, { type, payload }) => {
     case BOOKS_ACTIONS.SAVE_CATEGORY:
       return { ...state, categories: payload };
 
+    case BOOKS_ACTIONS.SAVE_SERIES:
+      return { ...state, series: payload };
     case BOOKS_ACTIONS.SAVE_AUTHORS:
       return { ...state, authors: payload };
 

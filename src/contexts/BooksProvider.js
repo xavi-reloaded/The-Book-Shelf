@@ -4,7 +4,6 @@ import filters from "./reducers/Filters";
 import {filtersInitialState} from "./initialStates/FilterInitialState";
 import {booksInitialState} from "./initialStates/BooksInitialState";
 import {BOOKS_ACTIONS, FILTERS_ACTION} from "../constants/dispatchTypes";
-
 export const BooksContext = createContext();
 
 const BooksProvider = ({ children }) => {
@@ -19,13 +18,25 @@ const BooksProvider = ({ children }) => {
     fetchProducts();
     fetchCategories();
     fetchAuthorList();
+    fetchSeries();
   }, []);
 
   useEffect(() => {
     if (searchTerm.length>2) fetchBooksByOpenSearch(searchTerm);
   }, [searchTerm]);
 
-  const fetchCategories = async (url = "http://localhost:3000/v1/categorias") => {
+  const fetchSeries = async (url = "http://localhost:3000/v1/series") => {
+    setLoading(true);
+    try {
+      const response = await fetch(url);
+      const { data, paging } = await response.json();
+      booksDispatch({ type: BOOKS_ACTIONS.SAVE_SERIES, payload: data});
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
+    }
+  }; const fetchCategories = async (url = "http://localhost:3000/v1/categorias") => {
     setLoading(true);
     try {
       const response = await fetch(url);
@@ -161,7 +172,8 @@ const BooksProvider = ({ children }) => {
         setSearchTerm,
         fetchBooksByAuthorApply,
         fetchBooksByCategory,
-        fetchBooksByAuthor
+        fetchBooksByAuthor,
+        fetchAuthorList
       }}
     >
       {children}
