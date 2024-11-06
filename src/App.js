@@ -21,13 +21,15 @@ import Checkout from "./pages/checkout/Checkout";
 import ThankYou from "./pages/thank-you/ThankYou";
 import ProductOverview from "./pages/productOverview/ProductsOverview";
 import PageNotFound from "./pages/pageNotFound/PageNotFound";
+import Dashboard from "./pages/home/Dashboard";
 
 function App() {
   return (
     <>
       <Routes>
         <Route path="/" element={<RootLayout />}>
-          <Route index element={<Home />} />
+          {/*<Route index element={<Home />} />*/}
+          <Route index element={<Dashboard />} />
           <Route path="login" element={<Login />} />
           <Route path="create-account" element={<SignUp />} />
           <Route path="product-overview/:id" element={<ProductOverview />} />
