@@ -122,22 +122,13 @@ const ProductLayout = () => {
         <div className="sticky z-20 flex items-baseline justify-between pt-40 pb-8 bg-gray-900 sm:top-16 lg:top-0 md:pt-24 mb-30">
           <h1 className="font-bold tracking-tight text-gray-100 md:text-xl lg:text-4xl">
             {category||'Todos los libros'}
-            {paging && paging.previous && <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  paging.previous && fetchProducts(`http://localhost:3000${paging.previous}`)
-                }}
-                disabled={!paging.previous}
-                className="px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded hover:bg-gray-700 disabled:opacity-50"
-            >
-              {paging.previous}
-            </button>}
+
             {paging &&  paging.next && <button
                 onClick={() => paging.next && fetchProducts(`http://localhost:3000${paging.next}`)}
                 disabled={!paging.next}
                 className="px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded hover:bg-gray-700 disabled:opacity-50"
             >
-              {paging.next}
+              Siguiente
             </button>}
           </h1>
 

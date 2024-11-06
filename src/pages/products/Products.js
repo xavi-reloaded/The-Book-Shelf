@@ -3,6 +3,7 @@ import { BooksContext } from "../../contexts/BooksProvider";
 import ProductCard from "../../components/products/ProductCard";
 import Loader from "../../components/loader/Loader";
 import { Transition } from "@headlessui/react";
+import ProductsPagination from "./ProductsPagination";
 
 const Products = () => {
   const {
@@ -48,25 +49,7 @@ const Products = () => {
       )}
 
       {/* Pagination controls */}
-      <div className="flex justify-between mt-4 items-center">
-        <button
-          onClick={() => paging && paging.previous && fetchProducts(`http://localhost:3000${paging.previous}`)}
-          disabled={!paging?.previous}
-          className="px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded hover:bg-gray-700 disabled:opacity-50"
-        >
-          Anterior
-        </button>
-        <span className="text-lg text-gray-200">
-          Página actual basada en servidor
-        </span>
-        <button
-          onClick={() => paging && paging.next && fetchProducts(`http://localhost:3000${paging.next}`)}
-          disabled={!paging?.next}
-          className="px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded hover:bg-gray-700 disabled:opacity-50"
-        >
-          Siguiente
-        </button>
-      </div>
+      <ProductsPagination fetchProducts={fetchProducts} paging={paging} />
     </>
   );
 };
