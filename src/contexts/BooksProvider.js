@@ -18,7 +18,9 @@ const BooksProvider = ({ children }) => {
   useEffect(() => {
     fetchProducts();
     fetchCategories();
+    fetchAuthorList();
   }, []);
+
   useEffect(() => {
     if (searchTerm.length>2) fetchBooksByOpenSearch(searchTerm);
   }, [searchTerm]);
@@ -56,6 +58,18 @@ const BooksProvider = ({ children }) => {
       const { data, paging } = await response.json();
       booksDispatch({ type: BOOKS_ACTIONS.SAVE_BOOKS_DATA, payload: data });
       setPaging(paging);
+    } catch (error) {
+      console.error("Error fetching data by author:", error);
+    } finally {
+      setLoading(false)
+    }
+  };
+  const fetchAuthorList= async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(`http://localhost:3000/v1/authors`);
+      const { data } = await response.json();
+      booksDispatch({ type: BOOKS_ACTIONS.SAVE_AUTHORS, payload: data });
     } catch (error) {
       console.error("Error fetching data by author:", error);
     } finally {

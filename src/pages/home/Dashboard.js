@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import {useContext, useEffect, useState} from 'react'
 import { NavLink } from 'react-router-dom'
 import { BooksContext } from '../../contexts/BooksProvider'
 import CategoryCard from '../../components/CategoryCard'
@@ -8,18 +8,18 @@ const links = [
 ]
 
 
+
  const Dashboard=()=> {
-    const {booksState,handleFilterReset}=useContext(BooksContext)
+    const {booksState: { authors },}=useContext(BooksContext)
     useEffect(()=>{
         document.title="Home | The Book Shelf"
     },[])
-
-    const [authorInitials, setAuthorInitials] = useState(authorsData);
-   const [selectedInitial, setSelectedInitial] = useState(null);
+    const [authorInitials, setAuthorInitials] = useState(authors);
+    const [selectedInitial, setSelectedInitial] = useState(null);
    const handleInitialClick = (initial) => {
      setSelectedInitial(initial);
    };
-     
+
     return (
         <div className='relative flex flex-col'>
             <div className="relative py-24 mt-16 overflow-hidden bg-gray-900 lg:mt-0 isolate sm:pt-32 sm:pb-16">
@@ -74,15 +74,15 @@ const links = [
                 {selectedInitial && (
                   <div className="grid grid-cols-2 gap-4">
                     {authorInitials[selectedInitial].map(author => (
-                      <div key={author.name} className="bg-gray-50 p-2 rounded shadow">
-                        {author.name} ({author.count})
+                      <div key={author.author} className="bg-gray-50 p-2 rounded shadow">
+                        {author.author} ({author.count})
                       </div>
                     ))}
                   </div>
                 )}
               </div>
             </div>
-            
+
         </div>
     )
 }

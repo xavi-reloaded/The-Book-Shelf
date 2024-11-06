@@ -4,5 +4,6 @@ export const booksInitialState={
     booksSearchData:[],
     wishlist:[],
     cart:[],
-    orders:[]
+    orders:[],
+    authors:{}
 }
