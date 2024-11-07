@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import { BooksContext } from '../../contexts/BooksProvider';
-
+import { useNavigate } from 'react-router-dom';
 const RecentlyAddedBooks = () => {
     const { booksState: { booksData } } = useContext(BooksContext);
-
+    const navigate = useNavigate();
     const shuffleArray = (array) => {
         let shuffled = array.slice();
         for (let i = shuffled.length - 1; i > 0; i--) {
@@ -14,13 +14,15 @@ const RecentlyAddedBooks = () => {
     };
 
     const recentlyAddedBooks = shuffleArray(booksData).slice(0, 12);
-
+    const handleCardClick = (bookSlug) => {
+        navigate(`/product-overview/${bookSlug}`);
+    };
     return (
         <div className="recent-books-section">
             <h2 className="text-xl font-semibold mb-4 text-white text-center">Libros Añadidos Recientemente</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                 {recentlyAddedBooks.map(book => (
-                    <div key={book.slug} className="bg-gray-100 p-0 shadow overflow-hidden h-64">
+                    <div key={book.slug} className="bg-gray-100 p-0 shadow overflow-hidden h-64" onClick={() => handleCardClick(book.slug)}>
                         <img
                             src={book.coverImage}
                             alt={book.title}
