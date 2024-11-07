@@ -6,6 +6,9 @@ import {booksInitialState} from "./initialStates/BooksInitialState";
 import {BOOKS_ACTIONS, FILTERS_ACTION} from "../constants/dispatchTypes";
 export const BooksContext = createContext();
 
+
+export const urlserver = "http://localhost:3000";
+
 const BooksProvider = ({ children }) => {
   const [filtersState, filtersDispatch] = useReducer(filters, filtersInitialState);
   const [booksState, booksDispatch] = useReducer(books, booksInitialState);
@@ -25,7 +28,7 @@ const BooksProvider = ({ children }) => {
     if (searchTerm.length>2) fetchBooksByOpenSearch(searchTerm);
   }, [searchTerm]);
 
-  const fetchSeries = async (url = "http://localhost:3000/v1/series") => {
+  const fetchSeries = async (url = urlserver + "/v1/series") => {
     setLoading(true);
     try {
       const response = await fetch(url);
@@ -36,7 +39,7 @@ const BooksProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
-  }; const fetchCategories = async (url = "http://localhost:3000/v1/categorias") => {
+  }; const fetchCategories = async (url = urlserver + "/v1/categorias") => {
     setLoading(true);
     try {
       const response = await fetch(url);
@@ -48,7 +51,7 @@ const BooksProvider = ({ children }) => {
       setLoading(false);
     }
   };
-  const fetchProducts = async (url = "http://localhost:3000/v1/ebooks") => {
+  const fetchProducts = async (url = urlserver + "/v1/ebooks") => {
     setLoading(true);
     try {
       const response = await fetch(url);
@@ -65,7 +68,20 @@ const BooksProvider = ({ children }) => {
   const fetchBooksByAuthor= async (author) => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:3000/v1/ebooks?author=${encodeURIComponent(author)}`);
+      const response = await fetch(`${urlserver}/v1/ebooks?author=${encodeURIComponent(author)}`);
+      const { data, paging } = await response.json();
+      booksDispatch({ type: BOOKS_ACTIONS.SAVE_BOOKS_DATA, payload: data });
+      setPaging(paging);
+    } catch (error) {
+      console.error("Error fetching data by author:", error);
+    } finally {
+      setLoading(false)
+    }
+  };
+  const fetchBooksBySeries= async (author) => {
+    setLoading(true);
+    try {
+      const response = await fetch(`${urlserver}/v1/ebooks?series=${encodeURIComponent(author)}`);
       const { data, paging } = await response.json();
       booksDispatch({ type: BOOKS_ACTIONS.SAVE_BOOKS_DATA, payload: data });
       setPaging(paging);
@@ -78,7 +94,7 @@ const BooksProvider = ({ children }) => {
   const fetchAuthorList= async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:3000/v1/authors`);
+      const response = await fetch(`${urlserver}/v1/authors`);
       const { data } = await response.json();
       booksDispatch({ type: BOOKS_ACTIONS.SAVE_AUTHORS, payload: data });
     } catch (error) {
@@ -90,7 +106,7 @@ const BooksProvider = ({ children }) => {
   const fetchBooksByCategory = async (category) => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:3000/v1/ebooks?categories=${encodeURIComponent(category)}`);
+      const response = await fetch(`${urlserver}/v1/ebooks?categories=${encodeURIComponent(category)}`);
       const { data, paging } = await response.json();
       booksDispatch({ type: BOOKS_ACTIONS.SAVE_BOOKS_DATA, payload: data });
       setPaging(paging);
@@ -103,7 +119,7 @@ const BooksProvider = ({ children }) => {
   const fetchBooksByOpenSearch = async (author) => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:3000/v1/ebooks?search=${encodeURIComponent(author)}`);
+      const response = await fetch(`${urlserver}/v1/ebooks?search=${encodeURIComponent(author)}`);
       const { data } = await response.json();
       booksDispatch({ type: BOOKS_ACTIONS.SAVE_BOOKS_DATA_SEARCH, payload: data });
     } catch (error) {
@@ -115,7 +131,7 @@ const BooksProvider = ({ children }) => {
   const fetchBooksByAuthorApply = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:3000/v1/ebooks?search=${encodeURIComponent(searchTerm)}`);
+      const response = await fetch(`${urlserver}/v1/ebooks?search=${encodeURIComponent(searchTerm)}`);
       const { data,paging } = await response.json();
       booksDispatch({ type: BOOKS_ACTIONS.SAVE_BOOKS_DATA, payload: data });
       setPaging(paging);
@@ -173,7 +189,8 @@ const BooksProvider = ({ children }) => {
         fetchBooksByAuthorApply,
         fetchBooksByCategory,
         fetchBooksByAuthor,
-        fetchAuthorList
+        fetchAuthorList,
+        fetchBooksBySeries
       }}
     >
       {children}

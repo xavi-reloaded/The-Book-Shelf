@@ -20,15 +20,15 @@ const CategoryCloud = () => {
 
                 return (
                     <span
-                        key={category}
+                        key={category.name}
                         className={`${randomSize} ${randomColor} cursor-pointer transition duration-300 ease-in-out transform hover:scale-125 hover:text-white`}
-                        onClick={() => handleCategoryClick(category)}
+                        onClick={() => handleCategoryClick(category.name)}
                         style={{
                             margin: "0.25rem",
                             padding: "0.5rem",
                         }}
                     >
-            {category}
+            {category.name}
           </span>
                 );
             })}

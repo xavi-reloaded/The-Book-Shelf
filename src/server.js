@@ -27,6 +27,7 @@ import {
 import { categories } from "./backend/db/categories";
 import { products } from "./backend/db/products";
 import { users } from "./backend/db/users";
+import {urlserver} from "./contexts/BooksProvider";
 
 export function makeServer({ environment = "development" } = {}) {
   return new Server({
@@ -59,37 +60,7 @@ export function makeServer({ environment = "development" } = {}) {
 
     routes() {
       this.namespace = "api";
-      // auth routes (public)
-      this.post("/auth/signup", signupHandler.bind(this));
-      this.post("/auth/login", loginHandler.bind(this));
-
-      // products routes (public)
-      this.get("/products", getAllProductsHandler.bind(this));
-      this.get("/products/:productId", getProductHandler.bind(this));
-
-      // categories routes (public)
-      this.get("/categories", getAllCategoriesHandler.bind(this));
-      this.get("/categories/:categoryId", getCategoryHandler.bind(this));
-
-      // cart routes (private)
-      this.get("/user/cart", getCartItemsHandler.bind(this));
-      this.post("/user/cart", addItemToCartHandler.bind(this));
-      this.post("/user/cart/bulk", addItemToCartHandlerInBulk.bind(this));
-      this.post("/user/cart/:productId", updateCartItemHandler.bind(this));
-      this.delete(
-        "/user/cart/:productId",
-        removeItemFromCartHandler.bind(this)
-      );
-
-      // wishlist routes (private)
-      this.get("/user/wishlist", getWishlistItemsHandler.bind(this));
-      this.post("/user/wishlist", addItemToWishlistHandler.bind(this));
-      this.post("/user/wishlist/bulk", addItemToWishlistHandlerInBulk.bind(this));
-      this.delete(
-        "/user/wishlist/:productId",
-        removeItemFromWishlistHandler.bind(this)
-      );
-      this.passthrough("http://localhost:3000/**");
+      this.passthrough(urlserver+"/**");
     },
   });
 }

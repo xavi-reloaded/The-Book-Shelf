@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { BooksContext } from '../../contexts/BooksProvider'
 import CategoryCard from '../../components/CategoryCard'
 import CategoryCloud from "./CategoryCloud";
+import Dashboard from "./Dashboard";
 const links = [
     { name: 'Explora', to: 'products' },
 ]
@@ -61,7 +62,9 @@ const links = [
                                 </NavLink>
                             ))}
                         </div>
-
+                        <div className="pb-10">
+                            <Dashboard />
+                        </div>
                         <div className="pb-80">
                             <CategoryCloud />
                         </div>

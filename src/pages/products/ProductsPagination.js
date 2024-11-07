@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import {urlserver} from "../../contexts/BooksProvider";
 
 const ProductsPagination = ({ fetchProducts, paging }) => {
     const recordsPerPage = 50;
@@ -8,14 +9,15 @@ const ProductsPagination = ({ fetchProducts, paging }) => {
 
     useEffect(() => {
         const getPageFromOffset = (url) => {
+            if (!url || !url.includes('?')) return 1;
             const urlParams = new URLSearchParams(url.split('?')[1]);
             const offset = parseInt(urlParams.get('offset'), 10) || 0;
             return Math.floor(offset / recordsPerPage) + 1;
         };
 
-        if (paging.previous) {
+        if (paging.previous!=='') {
             setCurrentPage(getPageFromOffset(paging.previous) + 1);
-        } else if (paging.next) {
+        } else if (paging.next!=='') {
             setCurrentPage(getPageFromOffset(paging.next) - 1);
         } else {
             setCurrentPage(1);
@@ -27,7 +29,7 @@ const ProductsPagination = ({ fetchProducts, paging }) => {
         const offset = (pageNumber - 1) * recordsPerPage;
         const limit = recordsPerPage;
         console.log()
-        fetchProducts(`http://localhost:3000/v1/ebooks?limit=${limit}&offset=${offset}`);
+        fetchProducts(`${urlserver}/v1/ebooks?limit=${limit}&offset=${offset}`);
     };
 
     const range = (start, end) => Array.from({ length: (end - start + 1) }, (_, i) => start + i);
