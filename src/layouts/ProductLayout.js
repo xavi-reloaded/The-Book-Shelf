@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 const ProductLayout = () => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const {
-    filtersState: { priceSlider, ratingSlider },
+    filtersState: { priceSlider, ratingSlider, bookQuery },
     filtersDispatch,
     handleFilterReset,
     paging,
@@ -164,6 +164,7 @@ const ProductLayout = () => {
                     Filtros
                   </span>
                   <span className="hidden w-px h-6 bg-gray-700 lg:block" aria-hidden="true" />
+                  {bookQuery!=='' &&
                   <button
                     onClick={()=>{
                       handleFilterReset()
@@ -173,8 +174,8 @@ const ProductLayout = () => {
                     type="button"
                   >
                     {" "}
-                    <XMarkIcon className="w-4 h-4 mr-2" /> Restaura
-                  </button>
+                    <XMarkIcon className="w-4 h-4 mr-2" /> Reset
+                  </button>}
                 </div>
                 <h3 className="sr-only">Categorias</h3>
                 <div className="mt-6 space-y-4">
@@ -182,6 +183,11 @@ const ProductLayout = () => {
                   {/*<Radio />*/}
                   <Range {...ratingsRange} />
                   {/*<Checkbox />*/}
+                  {bookQuery!==''&& <fieldset className="pb-4">
+                    <legend className="text-sm text-gray-100">{bookQuery.split('=')[0]}</legend>
+                    <ul className="text-sm font-medium text-gray-100">{bookQuery.split('=')[1]}</ul>
+
+                  </fieldset>}
                 </div>
               </form>
             </div>

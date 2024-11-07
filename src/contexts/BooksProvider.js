@@ -71,7 +71,7 @@ const BooksProvider = ({ children }) => {
       const response = await fetch(`${urlserver}/v1/ebooks?author=${encodeURIComponent(author)}`);
       const { data, paging } = await response.json();
       booksDispatch({ type: BOOKS_ACTIONS.SAVE_BOOKS_DATA, payload: data });
-      filtersDispatch({ type: FILTERS_ACTION.UPDATE_BOOK_QUERY, payload: `author=${encodeURIComponent(author)}` });
+      filtersDispatch({ type: FILTERS_ACTION.UPDATE_BOOK_QUERY, payload: `author=${author}` });
       setPaging(paging);
     } catch (error) {
       console.error("Error fetching data by author:", error);
@@ -85,7 +85,7 @@ const BooksProvider = ({ children }) => {
       const response = await fetch(`${urlserver}/v1/ebooks?series=${encodeURIComponent(author)}`);
       const { data, paging } = await response.json();
       booksDispatch({ type: BOOKS_ACTIONS.SAVE_BOOKS_DATA, payload: data });
-      filtersDispatch({ type: FILTERS_ACTION.UPDATE_BOOK_QUERY, payload: `series=${encodeURIComponent(author)}` });
+      filtersDispatch({ type: FILTERS_ACTION.UPDATE_BOOK_QUERY, payload: `series=${author}` });
       setPaging(paging);
     } catch (error) {
       console.error("Error fetching data by author:", error);
@@ -111,7 +111,7 @@ const BooksProvider = ({ children }) => {
       const response = await fetch(`${urlserver}/v1/ebooks?categories=${encodeURIComponent(category)}`);
       const { data, paging } = await response.json();
       booksDispatch({ type: BOOKS_ACTIONS.SAVE_BOOKS_DATA, payload: data });
-      filtersDispatch({ type: FILTERS_ACTION.UPDATE_BOOK_QUERY, payload: `categories=${encodeURIComponent(category)}` });
+      filtersDispatch({ type: FILTERS_ACTION.UPDATE_BOOK_QUERY, payload: `categories=${category}` });
       setPaging(paging);
     } catch (error) {
       console.error("Error fetching data by author:", error);
@@ -125,7 +125,7 @@ const BooksProvider = ({ children }) => {
       const response = await fetch(`${urlserver}/v1/ebooks?search=${encodeURIComponent(searchTerm)}`);
       const { data } = await response.json();
       booksDispatch({ type: BOOKS_ACTIONS.SAVE_BOOKS_DATA_SEARCH, payload: data });
-      filtersDispatch({ type: FILTERS_ACTION.UPDATE_BOOK_QUERY, payload: `search=${encodeURIComponent(searchTerm)}` });
+      filtersDispatch({ type: FILTERS_ACTION.UPDATE_BOOK_QUERY, payload: `search=${searchTerm}` });
     } catch (error) {
       console.error("Error fetching data by author:", error);
     } finally {
@@ -138,7 +138,7 @@ const BooksProvider = ({ children }) => {
       const response = await fetch(`${urlserver}/v1/ebooks?search=${encodeURIComponent(searchTerm)}`);
       const { data,paging } = await response.json();
       booksDispatch({ type: BOOKS_ACTIONS.SAVE_BOOKS_DATA, payload: data });
-      filtersDispatch({ type: FILTERS_ACTION.UPDATE_BOOK_QUERY, payload: `search=${encodeURIComponent(searchTerm)}` });
+      filtersDispatch({ type: FILTERS_ACTION.UPDATE_BOOK_QUERY, payload: `search=${searchTerm}` });
       setPaging(paging);
     } catch (error) {
       console.error("Error fetching data by author:", error);
