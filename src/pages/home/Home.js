@@ -4,6 +4,7 @@ import { BooksContext } from '../../contexts/BooksProvider'
 import CategoryCard from '../../components/CategoryCard'
 import CategoryCloud from "./CategoryCloud";
 import Dashboard from "./Dashboard";
+import RecentlyAddedBooks from "./JumboBooks";
 const links = [
     { name: 'Explora', to: 'products' },
 ]
@@ -62,8 +63,14 @@ const links = [
                                 </NavLink>
                             ))}
                         </div>
-                        <div className="pb-10">
+                        <div className="pb-4">
+                            <RecentlyAddedBooks />
+                        </div>
+                        <div className="pb-4">
                             <Dashboard />
+                        </div>
+                        <div className="pb-4">
+                            <RecentlyAddedBooks />
                         </div>
                         <div className="pb-80">
                             <CategoryCloud />
