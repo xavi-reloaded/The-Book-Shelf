@@ -28,7 +28,7 @@ const ProductOverview = () => {
   const {
     booksState: { booksData },fetchBooksByCategory,fetchBooksByAuthor
   } = useContext(BooksContext);
-  const product = booksData.find((ele) => ele.uid === id) ?? {};
+  const product = booksData.find((ele) => ele.slug === id) ?? {};
 
   if (showLoader) return <Loader />;
 
@@ -42,7 +42,7 @@ const ProductOverview = () => {
     navigate(`/products/${categoryName}`);
   };
 
-  const relatedBooks = booksData.filter(book => book.uid !== product.uid);
+  const relatedBooks = booksData.filter(book => book.slug !== product.slug);
 
   return (
     <section className="overflow-hidden text-gray-100">
@@ -91,8 +91,8 @@ const ProductOverview = () => {
             <h2 className="my-2 text-sm tracking-widest text-gray-500 title-font">Libros Relacionados</h2>
             <div className="grid grid-cols-5 md:grid-cols-6 lg:grid-cols-8 gap-2">
               {relatedBooks.map(book => (
-                  <div key={book.uid} className="flex items-center justify-center h-60 overflow-hidden bg-gray-200"
-                       onClick={()=>navigate(`/product-overview/${book.uid}`)}
+                  <div key={book.slug} className="flex items-center justify-center h-60 overflow-hidden bg-gray-200"
+                       onClick={()=>navigate(`/product-overview/${book.slug}`)}
                   >
                     <BookThumbnail imageSrc={book.coverImage} />
                   </div>
