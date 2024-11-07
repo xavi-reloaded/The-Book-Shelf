@@ -7,8 +7,8 @@ const SearchBar = () => {
     useContext(BooksContext);
   const navigate = useNavigate();
 
-  const handleCardSelect = ({ _id }) => {
-    navigate(`/product-overview/${_id}`);
+  const handleCardSelect = ({ slug }) => {
+    navigate(`/product-overview/${slug}`);
   };
 
   const handleEnterPress = (event) => {

@@ -33,15 +33,19 @@ const Dashboard = () => {
         fetchBooksBySeries(series);
         navigate(`/products/${series}`);
     };
+
+    const handleTab = (tab) => {
+        setActiveTab(activeTab === tab ? '' : tab)
+    };
   return (
-    <div className='relative flex flex-col'>
+    <div className='relative flex flex-col h-24 pt-5'>
         <div className='relative flex flex-col min-h-screen px-10'>
             {/* Índice de letras con barra de desplazamiento horizontal invisible y fija */}
             <div className="sticky top-0 flex justify-center overflow-x-auto gap-1 whitespace-nowrap pt-4 px-2 hide-scrollbar shadow-md z-10">
                 {['Autores', 'Géneros', 'Series'].map(tab => (
                     <button
                         key={tab}
-                        onClick={() => setActiveTab(tab)}
+                        onClick={() => handleTab(tab)}
                         className={`text-xs sm:text-sm md:text-base font-semibold px-2 py-1 ${
                             activeTab === tab ? 'bg-blue-500 text-white' : 'bg-gray-200'
                         }`}>
@@ -50,7 +54,7 @@ const Dashboard = () => {
                 ))}
             </div>
             {/* Contenido de las pestañas */}
-            <div className="pt-6 flex-grow overflow-y-auto">
+            { activeTab!=='' && <div className="pt-6 flex-grow overflow-y h-[300] bg-amber-300 p-5">
                 {activeTab === 'Autores' && selectedInitial && ( <>
                     <div className="flex justify-center overflow-x-auto whitespace-nowrap pt-4 px-2 gap-1 hide-scrollbar pb-10">
                         {Object.keys(authorInitials).sort().map((initial) => (
@@ -108,7 +112,7 @@ const Dashboard = () => {
                         ))}
                     </div>
                 </>)}
-            </div>
+            </div>}
         </div>
 
     </div>

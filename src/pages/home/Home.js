@@ -5,6 +5,7 @@ import CategoryCard from '../../components/CategoryCard'
 import CategoryCloud from "./CategoryCloud";
 import Dashboard from "./Dashboard";
 import RecentlyAddedBooks from "./JumboBooks";
+import Metrics from "./Metrics";
 const links = [
     { name: 'Explora', to: 'products' },
 ]
@@ -52,7 +53,7 @@ const links = [
                     <h2 className="text-4xl font-bold tracking-tight text-gray-100 sm:text-6xl">THE <span className="text-transparent bg-clip-text bg-gradient-to-tr from-[#ff4694] to-[#776fff] ">BOOK FLIPANTE</span></h2>
 
                         <p className="mt-6 text-lg leading-8 text-gray-300">
-                        Descubre un mundo de literatura gratuita. No es que sea muy legal pero que viva mi polla morena.
+                        Descubre un mundo de literatura gratuita. Obviamente está página es con fines educativos...
                         </p>
                     </div>
                     <div className="max-w-2xl mx-auto mt-10 lg:mx-0 lg:max-w-none">
@@ -70,11 +71,14 @@ const links = [
                             <Dashboard />
                         </div>
                         <div className="pb-4">
+                            <Metrics />
+                        </div>
+                        <div className="pb-4">
                             <RecentlyAddedBooks />
                         </div>
-                        <div className="pb-80">
-                            <CategoryCloud />
-                        </div>
+                        {/*<div className="pb-80">*/}
+                        {/*    <CategoryCloud />*/}
+                        {/*</div>*/}
 
                         {/* <div className="grid grid-cols-1 text-base font-semibold leading-7 text-gray-100 gap-x-8 gap-y-6 sm:grid-cols-2 md:flex lg:gap-x-10">
                                 <p >
