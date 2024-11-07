@@ -3,4 +3,5 @@ export const filtersInitialState = {
   selectedCategory: [],
   priceSlider: 1500,
   ratingSlider: 1,
+  bookQuery:""
 };

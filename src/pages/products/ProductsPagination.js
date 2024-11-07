@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
-import {urlserver} from "../../contexts/BooksProvider";
+import {useState, useEffect, useContext} from 'react';
+import {BooksContext, urlserver} from "../../contexts/BooksProvider";
 
 const ProductsPagination = ({ fetchProducts, paging }) => {
+    const { filtersState: { bookQuery },} = useContext(BooksContext);
     const recordsPerPage = 50;
     const totalRecords = paging.total || 0; // Total viene de paging
     const totalPages = Math.ceil(totalRecords / recordsPerPage);
@@ -28,8 +29,7 @@ const ProductsPagination = ({ fetchProducts, paging }) => {
         setCurrentPage(pageNumber);
         const offset = (pageNumber - 1) * recordsPerPage;
         const limit = recordsPerPage;
-        console.log()
-        fetchProducts(`${urlserver}/v1/ebooks?limit=${limit}&offset=${offset}`);
+        fetchProducts(`${urlserver}/v1/ebooks?limit=${limit}&offset=${offset}&${bookQuery}`);
     };
 
     const range = (start, end) => Array.from({ length: (end - start + 1) }, (_, i) => start + i);

@@ -22,5 +22,6 @@ export const FILTERS_ACTION ={
   UPDATE_CATEGORY:"update_category",
   UPDATE_PRICE_SLIDER:"update_price_slider",
   UPDATE_RATING_SLIDER:"update_rating_slider",
+  UPDATE_BOOK_QUERY:"update_book_query",
 
 }

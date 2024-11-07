@@ -17,7 +17,10 @@ const filters = (state, { type, payload }) => {
 
     case FILTERS_ACTION.UPDATE_RATING_SLIDER:
       return { ...state, ratingSlider: payload };
-      
+
+    case FILTERS_ACTION.UPDATE_BOOK_QUERY:
+      return { ...state, bookQuery: payload };
+
     default:
       return state;
   }
