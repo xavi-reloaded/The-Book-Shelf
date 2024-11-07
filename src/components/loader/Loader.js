@@ -23,8 +23,8 @@ const Loader = () => {
                 </g>
             </svg>
             <div className="text-center preloader__text">
-                <p className="text-gray-100 preloader__msg">Bringing you the Goods.</p>
-                <p className="text-gray-100 preloader__msg preloader__msg--last">Conjuring the Literary Wonders.</p>
+                <p className="text-gray-100 preloader__msg">Estamos descargando libros para ti.</p>
+                <p className="text-gray-100 preloader__msg preloader__msg--last">Conjuramos a las Musas de la Literatura.</p>
             </div>
                 </div>
         </div>
