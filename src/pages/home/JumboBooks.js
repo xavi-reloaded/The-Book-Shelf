@@ -24,7 +24,7 @@ const RecentlyAddedBooks = () => {
                         <img
                             src={book.coverImage}
                             alt={book.title}
-                            className="w-full h-32 object-cover"
+                            className="w-full h-32 object-cover transition-transform duration-300 ease-in-out group-hover:scale-110"
                         />
                         <div className="p-2">
                             <p className="text-center text-sm font-medium">{book.title}</p>
