@@ -12,6 +12,8 @@ import { AuthContext } from "../../contexts/AuthProvider";
 import Logout from "./logout/Logout";
 import { BooksContext } from "../../contexts/BooksProvider";
 import SearchBar from "../search-bar/SearchBar";
+
+import logo from "../../assets/logo-no-background.png"
 const Navbar = () => {
   const {
     userState: { isUserValid },
@@ -36,8 +38,8 @@ const Navbar = () => {
                 <NavLink to="/">
                   <span className="sr-only">The Book Shelf</span>
                   <img
-                    src="https://ik.imagekit.io/pb97gg2as/E-Commerce-Assets/logo-no-background.png?updatedAt=1684597528087"
-                    alt="THE BOOK SHELF"
+                    src={logo}
+                    alt="THE BOOK FLIPANTE"
                   />
                 </NavLink>
               </div>
