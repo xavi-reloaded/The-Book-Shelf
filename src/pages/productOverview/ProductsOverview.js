@@ -91,7 +91,9 @@ const ProductOverview = () => {
             <h2 className="my-2 text-sm tracking-widest text-gray-500 title-font">Libros Relacionados</h2>
             <div className="grid grid-cols-5 md:grid-cols-6 lg:grid-cols-8 gap-2">
               {relatedBooks.map(book => (
-                  <div key={book.uid} className="flex items-center justify-center h-60 overflow-hidden bg-gray-200">
+                  <div key={book.uid} className="flex items-center justify-center h-60 overflow-hidden bg-gray-200"
+                       onClick={()=>navigate(`/product-overview/${book.uid}`)}
+                  >
                     <BookThumbnail imageSrc={book.coverImage} />
                   </div>
               ))}
