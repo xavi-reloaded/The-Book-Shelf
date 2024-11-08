@@ -38,10 +38,10 @@ const Dashboard = () => {
         setActiveTab(activeTab === tab ? '' : tab)
     };
   return (
-    <div className='relative flex flex-col h-24 pt-5'>
-        <div className='relative flex flex-col min-h-screen px-10'>
+    <div className='relative flex flex-col pt-0'>
+        <div className='relative flex flex-col min-h-screen px-1 pt-1'>
             {/* Índice de letras con barra de desplazamiento horizontal invisible y fija */}
-            <div className="sticky top-0 flex justify-center overflow-x-auto gap-1 whitespace-nowrap pt-4 px-2 hide-scrollbar shadow-md z-10">
+            <div className="top-0 flex justify-center overflow-x-auto gap-1 whitespace-nowrap pt-4 px-2 z-10">
                 {['Autores', 'Géneros', 'Series'].map(tab => (
                     <button
                         key={tab}
@@ -54,9 +54,9 @@ const Dashboard = () => {
                 ))}
             </div>
             {/* Contenido de las pestañas */}
-            { activeTab!=='' && <div className="pt-6 flex-grow overflow-y h-[300] bg-amber-300 p-5">
+            { activeTab!=='' && <div className="pt-6 flex-grow overflow-y h-[300] p-0">
                 {activeTab === 'Autores' && selectedInitial && ( <>
-                    <div className="flex justify-center overflow-x-auto whitespace-nowrap pt-4 px-2 gap-1 hide-scrollbar pb-10">
+                    <div className="flex justify-center overflow-x-auto whitespace-nowrap pt-4 px-2 gap-1 hide-scrollbar pb-1">
                         {Object.keys(authorInitials).sort().map((initial) => (
                             <button
                                 key={initial}
@@ -68,10 +68,10 @@ const Dashboard = () => {
                             </button>
                         ))}
                     </div>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-4 ">
                         {authorInitials[selectedInitial].map(author => (
                             <div key={author.author} className="bg-gray-50 p-2 rounded shadow overflow-hidden">
-                <span className="block text-ellipsis whitespace-nowrap overflow-hidden" onClick={()=>handleAuthorClick(author.author)}>
+                <span className="block text-ellipsis whitespace-nowrap overflow-hidden text-xs" onClick={()=>handleAuthorClick(author.author)}>
                   {author.author} ({author.count})
                 </span>
                             </div>
@@ -79,10 +79,10 @@ const Dashboard = () => {
                     </div>
                 </>)}
                 {activeTab === 'Géneros' && (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
                         {categories.map(genre => (
                             <div key={genre} className="bg-gray-50 p-2 rounded shadow overflow-hidden">
-                <span className="block text-ellipsis whitespace-nowrap overflow-hidden" onClick={() => handleCategoryClick(genre.name)}>
+                <span className="block text-ellipsis whitespace-nowrap overflow-hidden text-xs" onClick={() => handleCategoryClick(genre.name)}>
                   {genre.name} ({genre.count})
                 </span>
                             </div>
@@ -90,7 +90,7 @@ const Dashboard = () => {
                     </div>
                 )}
                 {activeTab === 'Series' && selectedSeriessInitial && ( <>
-                    <div className="flex justify-center overflow-x-auto whitespace-nowrap pt-4 px-2 gap-1 hide-scrollbar pb-10">
+                    <div className="flex justify-center overflow-x-auto whitespace-nowrap pt-4 px-2  hide-scrollbar pb-10">
                         {Object.keys(seriesInitials).sort().map((initial) => (
                             <button
                                 key={initial}
@@ -102,10 +102,10 @@ const Dashboard = () => {
                             </button>
                         ))}
                     </div>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
                         {seriesInitials[selectedSeriessInitial].map(author => (
                             <div key={author.series} className="bg-gray-50 p-2 rounded shadow overflow-hidden">
-                <span className="block text-ellipsis whitespace-nowrap overflow-hidden"  onClick={() => handleSeriesClick(author.series)}>
+                <span className="block text-ellipsis whitespace-nowrap overflow-hidden text-xs"  onClick={() => handleSeriesClick(author.series)}>
                   {author.series} ({author.count})
                 </span>
                             </div>

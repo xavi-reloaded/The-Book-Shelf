@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import {useContext, useEffect, useState} from 'react'
 import { NavLink } from 'react-router-dom'
 import { BooksContext } from '../../contexts/BooksProvider'
 import CategoryCard from '../../components/CategoryCard'
@@ -6,6 +6,7 @@ import CategoryCloud from "./CategoryCloud";
 import Dashboard from "./Dashboard";
 import RecentlyAddedBooks from "./JumboBooks";
 import Metrics from "./Metrics";
+import Modal from "./modal";
 const links = [
     { name: 'Explora', to: 'products' },
 ]
@@ -14,6 +15,9 @@ const links = [
  const Home=()=> {
 
      const {fetchStats} = useContext(BooksContext);
+     const [showModal, setShowModal] = useState(false);
+     const handleOpenModal = () => setShowModal(true);
+     const handleCloseModal = () => setShowModal(false);
 
     useEffect(()=>{
         document.title="Home | The Book Flipante"
@@ -71,8 +75,25 @@ const links = [
                         <div className="pb-4">
                             <RecentlyAddedBooks />
                         </div>
-                        <div className="pb-4">
-                            <Dashboard />
+
+                        <div className="pb-4 flex flex-col items-center justify-center gap-1 ">
+
+
+                            <div
+                                className="px-4 py-2 mt-8 bg-blue-500 text-white "
+                            >
+                                {['Autores', 'Géneros', 'Series'].map(tab => (
+                                    <button
+                                        key={tab}
+                                        onClick={handleOpenModal}
+                                        className={`text-xs sm:text-sm md:text-base font-semibold px-2 py-1 `}>
+                                        {tab}
+                                    </button>
+                                ))}
+                            </div>
+                            <Modal showModal={showModal} onClose={handleCloseModal}>
+                                <Dashboard />
+                            </Modal>
                         </div>
                         <div className="pb-4">
                             <Metrics />
