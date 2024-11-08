@@ -9,7 +9,7 @@ const Checkout = () => {
   } = useContext(BooksContext);
 
   useEffect(()=>{
-    document.title="Checkout | The Book Shelf"
+    document.title="Checkout | The Book Flipante"
   },[])
   return (
     <div className="py-32">

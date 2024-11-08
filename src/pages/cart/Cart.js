@@ -10,7 +10,7 @@ const Cart = () => {
   } = useContext(BooksContext);
 
   useEffect(()=>{
-    document.title="Cart | The Book Shelf"
+    document.title="Cart | The Book Flipante"
   },[])
   return (
     <div className="mt-40 sm:mt-20 ">

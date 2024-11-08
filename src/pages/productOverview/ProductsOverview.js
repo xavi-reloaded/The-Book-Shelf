@@ -20,7 +20,7 @@ const ProductOverview = () => {
   const navigate = useNavigate();
   const [showLoader, setShowLoader] = useState(true);
   useEffect(() => {
-    document.title = "Product Overview | The Book Shelf";
+    document.title = "Product Overview | The Book Flipante";
     setTimeout(() => {
       setShowLoader(false);
     }, 100);

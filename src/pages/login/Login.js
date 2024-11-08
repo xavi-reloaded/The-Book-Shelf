@@ -19,7 +19,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   useLayoutEffect(() => {
-    document.title="Login | The Book Shelf"
+    document.title="Login | The Book Flipante"
     getAuth() !== null ? navigate("/") : setUserState(authInitialState);
   }, [navigate, setUserState]);
 
@@ -44,7 +44,7 @@ const Login = () => {
           <div className="w-full bg-gray-800 border border-gray-700 rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-100 md:text-2xl">
-                Sign in to your account
+                Entra en tu cuenta
               </h1>
               <form
                 onSubmit={submitHandlerFn}
@@ -55,7 +55,7 @@ const Login = () => {
                     htmlFor="email"
                     className="block mb-2 text-sm font-medium text-gray-100"
                   >
-                    Your email
+                    Tu email
                   </label>
                   <input
                     type="email"
@@ -104,7 +104,7 @@ const Login = () => {
                   type="submit"
                   className="w-full px-5 py-2.5 text-xs lg:text-sm font-medium text-center text-gray-100 rounded-lg bg-cyan-900 focus:ring-4 focus:outline-none hover:bg-cyan-950 focus:ring-cyan-950"
                 >
-                  Sign in
+                  Entra
                 </button>
 
                 <button
@@ -115,12 +115,12 @@ const Login = () => {
                   Test User
                 </button>
                 <p className="text-sm font-light text-gray-400">
-                  Don't have an account yet?
+                  No tienes cuenta y quieres crear una ? Pues te jodes como Herodes
                   <Link
                     to="/create-account"
                     className="ml-1 font-medium text-gray-100 hover:underline"
                   >
-                    Create Account
+                    Crea una cuenta
                   </Link>
                 </p>
               </form>

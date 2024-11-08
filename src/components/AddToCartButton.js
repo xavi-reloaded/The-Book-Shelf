@@ -72,7 +72,7 @@ const AddToCartButton = ({ product }) => {
           />
         </svg>
       )}
-      {addedToCart ? "GO" : "ADD"}
+      {addedToCart ? "Descarga" : "Añade"}
     </button>
   );
 };

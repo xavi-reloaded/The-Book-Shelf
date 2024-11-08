@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const PageNotFound=()=> {
     useEffect(()=>{
-            document.title="Page Unavailable | The Book Shelf"
+            document.title="Page Unavailable | The Book Flipante"
     },[])
   return (
     <>

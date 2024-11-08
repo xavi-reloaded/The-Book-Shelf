@@ -7,7 +7,7 @@ import Checkbox from "../components/products/filters/Checkbox";
 import Range from "../components/products/filters/Range";
 
 import { Outlet, useParams } from "react-router-dom";
-import { BooksContext } from "../contexts/BooksProvider";
+import {BooksContext, urlserver} from "../contexts/BooksProvider";
 import { FILTERS_ACTION } from "../constants/dispatchTypes";
 import { useNavigate } from "react-router-dom";
 const ProductLayout = () => {
@@ -123,13 +123,14 @@ const ProductLayout = () => {
           <h1 className="font-bold tracking-tight text-gray-100 md:text-xl lg:text-4xl">
             {category||'Todos los libros'}
 
-            {paging &&  paging.next && <button
-                onClick={() => paging.next && fetchProducts(`http://localhost:3000${paging.next}`)}
-                disabled={!paging.next}
-                className="px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded hover:bg-gray-700 disabled:opacity-50"
-            >
-              Siguiente
-            </button>}
+            {/*{paging &&  paging.next && <button*/}
+            {/*    onClick={() => paging.next && fetchProducts(`${urlserver}/${paging.next}`)}*/}
+            {/*    disabled={!paging.next}*/}
+            {/*    className="px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded hover:bg-gray-700 disabled:opacity-50"*/}
+            {/*>*/}
+            {/*  Siguiente*/}
+            {/*</button>}*/}
+
           </h1>
 
           <div className="flex items-center">

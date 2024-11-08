@@ -12,10 +12,14 @@ const links = [
 
 
  const Home=()=> {
-    const {booksState,handleFilterReset}=useContext(BooksContext)
+
+     const {fetchStats} = useContext(BooksContext);
+
     useEffect(()=>{
-        document.title="Home | The Book Shelf"
+        document.title="Home | The Book Flipante"
+        fetchStats();
     },[])
+
     return (
         <div className='relative flex flex-col'>
             <div className="relative py-24 mt-16 overflow-hidden bg-gray-900 lg:mt-0 isolate sm:pt-32 sm:pb-16">

@@ -12,7 +12,7 @@ const User = () => {
   const [selectedTab, setSelectedTab] = useState(tab ?? "address");
 
   useEffect(()=>{
-    document.title="User | The Book Shelf"
+    document.title="User | The Book Flipante"
   },[])
   return (
     <div className="mx-4 mt-40">

@@ -1,10 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import ScoreCard from "./ScoreCard";
+import {BooksContext} from "../../contexts/BooksProvider";
 
 const Metrics = () => {
+
+
+    const {booksState:{stats}} = useContext(BooksContext);
+
     const metrics = [
-        { title: 'Libros Disponibles', value: '50,000' },
-        { title: 'Autores', value: '20,000' },
+        { title: 'Libros Disponibles', value: stats.totalBooks },
+        { title: 'Autores', value: stats.totalAuthors },
         { title: 'Comentarios', value: '10,000' },
     ];
 

@@ -3,6 +3,8 @@ import { booksInitialState } from "../initialStates/BooksInitialState";
 
 const books = (state, { type, payload }) => {
   switch (type) {
+    case BOOKS_ACTIONS.SAVE_STATS:
+      return { ...state, stats: payload };
     case BOOKS_ACTIONS.SAVE_CATEGORY:
       return { ...state, categories: payload };
 

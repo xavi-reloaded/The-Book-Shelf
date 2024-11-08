@@ -6,5 +6,6 @@ export const booksInitialState={
     cart:[],
     orders:[],
     authors:{},
-    series:[]
+    series:[],
+    stats: {"totalBooks": 0, "totalAuthors": 0}
 }

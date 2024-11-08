@@ -12,7 +12,7 @@ const Wishlist = () => {
   );
 
   useEffect(()=>{
-    document.title="Wishlist | The Book Shelf"
+    document.title="Wishlist | The Book Flipante"
   },[])
   return (
     <section>

@@ -1,4 +1,5 @@
 export const BOOKS_ACTIONS = {
+  SAVE_STATS: "save_stats",
   SAVE_SERIES: "save_series",
   SAVE_AUTHORS: "save_authors",
   SAVE_CATEGORY: "save_category",

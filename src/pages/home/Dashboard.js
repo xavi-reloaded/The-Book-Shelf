@@ -11,7 +11,7 @@ const Dashboard = () => {
     const [selectedSeriessInitial, setSelectedSeriesInitial] = useState(Object.keys(series)[0]);
 
   useEffect(() => {
-    document.title = "Home | The Book Shelf";
+    document.title = "Home | The Book Flipante";
   }, []);
 
   const handleInitialClick = (initial) => {

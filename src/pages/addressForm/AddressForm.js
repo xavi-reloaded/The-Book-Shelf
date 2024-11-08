@@ -32,7 +32,7 @@ export default function AddressForm() {
   const { setAddress } = useContext(AddressContext);
 
   useEffect(() => {
-      document.title="Address | The Book Shelf"
+      document.title="Address | The Book Flipante"
     if (location?.state?.selectedForm) {
       setAddressForm(location.state.selectedForm);
     }

@@ -9,13 +9,13 @@ const Footer = () => {
                 </span>
                 <ul className="flex flex-wrap items-center justify-center mt-3 text-sm font-medium text-gray-100 md:justify-normal sm:mt-0">
                     <li>
-                        <NavLink target='blank' to="https://github.com/PsKalsi19" className="mr-4 hover:underline md:mr-6 "> Github </NavLink>
+                        <NavLink target='blank' to="https://github.com/donald-trump" className="mr-4 hover:underline md:mr-6 "> Github </NavLink>
                     </li>
                     <li>
-                        <NavLink target='blank' to="https://twitter.com/kalamaurcode" className="mr-4 hover:underline md:mr-6">Twitter</NavLink>
+                        <NavLink target='blank' to="https://twitter.com/donaldtrump" className="mr-4 hover:underline md:mr-6">Twitter</NavLink>
                     </li>
                     <li>
-                        <NavLink target='blank' to="https://www.linkedin.com/in/prabhjot-kalsi-8390a6240/" className="mr-4 hover:underline md:mr-6">LinkedIn</NavLink>
+                        <NavLink target='blank' to="https://www.linkedin.com/in/donald-trump/" className="mr-4 hover:underline md:mr-6">LinkedIn</NavLink>
                     </li>
                 </ul>
             </div>

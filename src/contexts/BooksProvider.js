@@ -7,7 +7,7 @@ import {BOOKS_ACTIONS, FILTERS_ACTION} from "../constants/dispatchTypes";
 export const BooksContext = createContext();
 
 
-export const urlserver = "http://localhost:3000";
+export const urlserver = "https://api.andorworld.com:3030";
 
 const BooksProvider = ({ children }) => {
   const [filtersState, filtersDispatch] = useReducer(filters, filtersInitialState);
@@ -22,12 +22,25 @@ const BooksProvider = ({ children }) => {
     fetchCategories();
     fetchAuthorList();
     fetchSeries();
+    fetchStats();
   }, []);
 
   useEffect(() => {
-    if (searchTerm.length>2) fetchBooksByOpenSearch(searchTerm);
+    //if (searchTerm.length>2) fetchBooksByOpenSearch(searchTerm);
   }, [searchTerm]);
 
+  const fetchStats = async (url = urlserver + "/v1/stats") => {
+    setLoading(true);
+    try {
+      const response = await fetch(url);
+      const { data, paging } = await response.json();
+      booksDispatch({ type: BOOKS_ACTIONS.SAVE_STATS, payload: data});
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
+    }
+  }
   const fetchSeries = async (url = urlserver + "/v1/series") => {
     setLoading(true);
     try {
@@ -198,7 +211,8 @@ const BooksProvider = ({ children }) => {
         fetchBooksByCategory,
         fetchBooksByAuthor,
         fetchAuthorList,
-        fetchBooksBySeries
+        fetchBooksBySeries,
+        fetchStats
       }}
     >
       {children}

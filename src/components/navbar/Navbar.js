@@ -36,7 +36,7 @@ const Navbar = () => {
             <div className="flex items-center justify-between">
               <div className="flex w-1/2 overflow-hidden sm:ml-4 md:w-1/12 lg:ml-0">
                 <NavLink to="/">
-                  <span className="sr-only">The Book Shelf</span>
+                  <span className="sr-only">The Book Flipante</span>
                   <img
                     src={logo}
                     alt="THE BOOK FLIPANTE"

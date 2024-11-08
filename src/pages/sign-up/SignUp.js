@@ -20,7 +20,7 @@ const SignUp = () => {
   const { handleSignUpFn } = useContext(AuthContext);
 
   useEffect(()=>{
-    document.title="Sign Up | The Book Shelf"
+    document.title="Sign Up | The Book Flipante"
   },[])
 
   const handleSubmit = (e) => {
