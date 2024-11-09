@@ -6,7 +6,7 @@ import {booksInitialState} from "./initialStates/BooksInitialState";
 import {BOOKS_ACTIONS, FILTERS_ACTION} from "../constants/dispatchTypes";
 import {updateWishlist} from "../services/localstorage-service";
 import {toast} from "react-hot-toast";
-import {addToWishlist, removeFromWishlist} from "../services/wishlist-service";
+import {addToWishlist, getWishlist, removeFromWishlist} from "../services/wishlist-service";
 export const BooksContext = createContext();
 
 
@@ -26,6 +26,7 @@ const BooksProvider = ({ children }) => {
     fetchAuthorList();
     fetchSeries();
     fetchStats();
+    syncWishlistData();
   }, []);
 
   useEffect(() => {
@@ -169,17 +170,22 @@ const BooksProvider = ({ children }) => {
         : booksSearchData
   }
 
+  const syncWishlistData = async (payload) => {
+    const wishlist = getWishlist();
+    booksDispatch({type: BOOKS_ACTIONS.SAVE_WISHLIST, payload: wishlist,});
+  };
+
   const addWishlistHandler = async (product, showToast = true) => {
     booksDispatch({type: BOOKS_ACTIONS.WISHLISTED, payload: product.uid,});
     const withlist = addToWishlist(product);
-    //booksDispatch({type: BOOKS_ACTIONS.SAVE_WISHLIST, payload: withlist});
+    booksDispatch({type: BOOKS_ACTIONS.SAVE_WISHLIST, payload: withlist});
     showToast && toast.success("Añadido a la Wishlist");
     updateWishlist(withlist);
   };
   const removeWishlistHandler = async (productID) => {
     booksDispatch({type: BOOKS_ACTIONS.REMOVE_WISHLISTED, payload: productID,});
     const withlist = removeFromWishlist(productID);
-    //booksDispatch({type: BOOKS_ACTIONS.SAVE_WISHLIST, payload: withlist});
+    booksDispatch({type: BOOKS_ACTIONS.SAVE_WISHLIST, payload: withlist});
     toast.success("Eliminado de la Wishlist");
     updateWishlist(withlist);
   };

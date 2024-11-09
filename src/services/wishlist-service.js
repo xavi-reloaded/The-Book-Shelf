@@ -42,6 +42,7 @@ export const removeFromWishlist = (productId) => {
     const updatedWishlist = wishlist.filter(item => item.uid !== productId);
     // Guardar la wishlist actualizada en localStorage
     localStorage.setItem(WISHLIST_STORAGE_KEY, JSON.stringify(updatedWishlist));
+    return updatedWishlist;
 };
 
 export const isProductInWishlist = (productId) => {
