@@ -11,10 +11,10 @@ const WishlistButton = ({product}) => {
     const location=useLocation();
     const wishlistToggleHandler = (e, product) => {
         e.stopPropagation();
-        if (checkForAuth()) return;
+        //if (checkForAuth()) return;
         handleWishlistToggle(product);
       };
-    
+
       const checkForAuth = () => {
         if (getAuth() === null) {
           toast.error("Log in to continue.");
@@ -35,7 +35,7 @@ const WishlistButton = ({product}) => {
           strokeWidth={2}
           stroke="currentColor"
           className={`w-3/4 p-2 ${
-            product.wishlisted && getAuth() !== null
+            product.wishlisted
               ? "fill-current"
               : "hover:fill-current"
           } bg-pink-200 rounded-full bg-opacity-60 h-3/4`}

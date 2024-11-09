@@ -4,6 +4,9 @@ import filters from "./reducers/Filters";
 import {filtersInitialState} from "./initialStates/FilterInitialState";
 import {booksInitialState} from "./initialStates/BooksInitialState";
 import {BOOKS_ACTIONS, FILTERS_ACTION} from "../constants/dispatchTypes";
+import {updateWishlist} from "../services/localstorage-service";
+import {toast} from "react-hot-toast";
+import {addToWishlist} from "../services/wishlist-service";
 export const BooksContext = createContext();
 
 
@@ -167,7 +170,37 @@ const BooksProvider = ({ children }) => {
   }
 
   const removeWishlistHandler = () => []
-  const handleWishlistToggle = () => []
+  const handleWishlistToggle = (product) => {
+    try {
+      product.wishlisted
+          ? removeWishlistHandler(product.uid)
+          : addWishlistHandler(product);
+    } catch (error) {
+      booksDispatch({
+        type: BOOKS_ACTIONS.REMOVE_WISHLISTED,
+        payload: product.uid,
+      });
+      handleError(error);
+    }
+  };
+  const handleError = (e) => {
+    console.error(e);
+    toast.error("Something Went Wrong, Try Later");
+  };
+  const addWishlistHandler = async (product, showToast = true) => {
+    booksDispatch({
+      type: BOOKS_ACTIONS.WISHLISTED,
+      payload: product._id,
+    });
+    await addToWishlist({ product }).then((data) => {
+      booksDispatch({
+        type: BOOKS_ACTIONS.SAVE_WISHLIST,
+        payload: data?.data?.wishlist,
+      });
+      showToast && toast.success("Added to Wishlist");
+      updateWishlist(data?.data?.wishlist);
+    });
+  };
   const addToCartHandler = () => []
   const removeFromCartHandler = () => []
   const moveToWishlistHandler = () => []
