@@ -6,7 +6,7 @@ import {booksInitialState} from "./initialStates/BooksInitialState";
 import {BOOKS_ACTIONS, FILTERS_ACTION} from "../constants/dispatchTypes";
 import {updateWishlist} from "../services/localstorage-service";
 import {toast} from "react-hot-toast";
-import {addToWishlist, getWishlist, removeFromWishlist} from "../services/wishlist-service";
+import {addToWishlist, getWishlist, isProductInWishlist, removeFromWishlist} from "../services/wishlist-service";
 export const BooksContext = createContext();
 
 
@@ -190,8 +190,9 @@ const BooksProvider = ({ children }) => {
     updateWishlist(withlist);
   };
   const handleWishlistToggle = (product) => {
+    const wishlisted = isProductInWishlist(product.uid);
     try {
-      product.wishlisted ? removeWishlistHandler(product.uid) : addWishlistHandler(product);
+      wishlisted ? removeWishlistHandler(product.uid) : addWishlistHandler(product);
     } catch (error) {
       booksDispatch({type: BOOKS_ACTIONS.REMOVE_WISHLISTED, payload: product.uid,});
       handleError(error);

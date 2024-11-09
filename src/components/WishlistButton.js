@@ -6,7 +6,8 @@ import { BooksContext } from "../contexts/BooksProvider";
 
 const WishlistButton = ({product}) => {
 
-    const {handleWishlistToggle}=useContext(BooksContext)
+    const {handleWishlistToggle, booksState: { wishlist }} = useContext(BooksContext)
+
     const navigate=useNavigate()
     const location=useLocation();
     const wishlistToggleHandler = (e, product) => {
@@ -22,6 +23,7 @@ const WishlistButton = ({product}) => {
           return true;
         }
       };
+
     return (
         <button
         type="button"
@@ -35,7 +37,7 @@ const WishlistButton = ({product}) => {
           strokeWidth={2}
           stroke="currentColor"
           className={`w-3/4 p-2 ${
-            product.wishlisted
+              wishlist.find(f=>f.uid===product.uid)
               ? "fill-current"
               : "hover:fill-current"
           } bg-pink-200 rounded-full bg-opacity-60 h-3/4`}
