@@ -8,9 +8,9 @@ const Metrics = () => {
     const {booksState:{stats}} = useContext(BooksContext);
 
     const metrics = [
-        { title: 'Libros Disponibles', value: stats.totalBooks },
+        { title: 'Libros Disponibles', value: stats.totalBooks||0 },
         { title: 'Autores', value: stats.totalAuthors },
-        { title: 'Comentarios', value: '10,000' },
+        { title: 'Comentarios', value: 0 },
     ];
 
     return (
