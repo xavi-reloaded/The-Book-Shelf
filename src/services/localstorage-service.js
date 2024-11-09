@@ -1,3 +1,5 @@
+import {addToWishlist} from "./wishlist-service";
+
 const AUTH_TOKEN = "auth_token";
 const USER = "user";
 const CART = "cart";
@@ -36,9 +38,10 @@ export const updateCart = (payload) => {
   setUser({ ...userData, [CART]: payload });
 };
 
-export const updateWishlist = (payload) => {
+export const updateWishlist = (withlist) => {
+  setUser({firstName:'Anom',lastName:'Epub', email:'epub@epub.com'})
   const userData = getUser();
-  setUser({ ...userData, [WISHLIST]: payload });
+  setUser({ ...userData, [WISHLIST]: withlist });
 };
 
 export const getUserName = () => {

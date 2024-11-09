@@ -12,7 +12,7 @@ const ProductCard = ({ product, fromWishlist }) => {
 
   const removeFromWishList = (e, product) => {
     e.stopPropagation();
-    removeWishlistHandler(product.slug);
+    removeWishlistHandler(product.uid);
   };
 
   const productOverview = (slug) => {

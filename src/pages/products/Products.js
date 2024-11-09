@@ -4,6 +4,7 @@ import ProductCard from "../../components/products/ProductCard";
 import Loader from "../../components/loader/Loader";
 import { Transition } from "@headlessui/react";
 import ProductsPagination from "./ProductsPagination";
+import {isProductInWishlist} from "../../services/wishlist-service";
 
 const Products = () => {
   const {
@@ -34,9 +35,10 @@ const Products = () => {
       >
         {booksData && booksData.length > 0 && (
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            {booksData.map((product) => (
-              <ProductCard key={product.slug} product={product} />
-            ))}
+            {booksData.map((product) => {
+                const fromWishlist = isProductInWishlist(product.uid);
+                return <ProductCard key={product.slug} product={product} fromWishlist={fromWishlist}/>
+            })}
           </div>
         )}
       </Transition>
