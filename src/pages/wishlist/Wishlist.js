@@ -5,11 +5,8 @@ import { Link } from "react-router-dom";
 
 const Wishlist = () => {
   const {
-    booksState: { wishlist, booksData },
-  } = useContext(BooksContext);
-  const wishListedItems = booksData.filter((ele) =>
-    wishlist.find(({ _id }) => ele._id === _id)
-  );
+    booksState: { wishlist },} = useContext(BooksContext);
+  const wishListedItems = wishlist;
 
   useEffect(()=>{
     document.title="Wishlist | The Book Flipante"
@@ -25,9 +22,9 @@ const Wishlist = () => {
       </h1>
       {wishListedItems && wishListedItems.length > 0 && (
         <section className="max-w-5xl mx-auto">
-          <div className="flex flex-wrap justify-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {wishListedItems.map((product) => (
-              <ProductCard key={product._id} product={product} />
+              <ProductCard key={product.uid} product={product} fromWishlist={true}/>
             ))}
           </div>
         </section>
@@ -37,13 +34,13 @@ const Wishlist = () => {
         <div className="grid h-60 place-items-center">
           <div>
             <p className="my-4 text-2xl font-semibold tracking-wide text-gray-100">
-              Wishlist is Empty.
+              La Wishlist está vacia.
             </p>
             <Link
               to="/products"
               className="w-full px-5 block py-2.5 text-xs lg:text-sm font-medium text-center text-gray-100 rounded-lg bg-cyan-900 focus:ring-4 focus:outline-none hover:bg-cyan-950 focus:ring-cyan-950"
             >
-              SHOP NOW
+              ENCUENTRA TU LIBRO
             </Link>
           </div>
         </div>

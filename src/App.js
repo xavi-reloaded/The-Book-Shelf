@@ -60,9 +60,7 @@ function App() {
           <Route
             path="wishlist"
             element={
-              <CanActivate>
                 <Wishlist />
-              </CanActivate>
             }
           />
           <Route path="user">

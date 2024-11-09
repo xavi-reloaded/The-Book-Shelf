@@ -1,5 +1,5 @@
 import { Fragment, useContext, useEffect, useState } from "react";
-import { Dialog, Menu, Transition } from "@headlessui/react";
+import {Combobox, Dialog, Menu, Transition} from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { FunnelIcon } from "@heroicons/react/20/solid";
 import Radio from "../components/products/filters/Radio";
@@ -17,7 +17,8 @@ const ProductLayout = () => {
     filtersDispatch,
     handleFilterReset,
     paging,
-    fetchProducts
+    fetchProducts,
+      booksState:{wishlist}
   } = useContext(BooksContext);
 
   const { category } = useParams();
@@ -55,6 +56,7 @@ const ProductLayout = () => {
     dispatchType: FILTERS_ACTION.UPDATE_PRICE_SLIDER,
   };
   const navigate = useNavigate();
+
   return (
     <div className="mx-auto md:max-w-2xl lg:max-w-7xl">
       {/* Mobile filter dialog */}
@@ -122,7 +124,7 @@ const ProductLayout = () => {
         <div className="sticky z-20 flex items-baseline justify-between pt-40 pb-8 bg-gray-900 sm:top-16 lg:top-0 md:pt-24 mb-30">
           <h1 className="font-bold tracking-tight text-gray-100 md:text-xl lg:text-4xl">
             {category||'Todos los libros'}
-            <span className="text-base text-gray-500">{` (${paging.total.toLocaleString('es-ES')})`}</span>
+            <span className="text-base text-gray-500">{` (${paging.total?paging.total.toLocaleString('es-ES'):''})`}</span>
 
             {/*{paging &&  paging.next && <button*/}
             {/*    onClick={() => paging.next && fetchProducts(`${urlserver}/${paging.next}`)}*/}
@@ -190,6 +192,22 @@ const ProductLayout = () => {
                     <ul className="text-sm font-medium text-gray-100">{bookQuery.split('=')[1]}</ul>
 
                   </fieldset>}
+
+                  {wishlist.map((product) => (
+                      <div className={"relative flex h-12 gap-0 items-center text-gray-100 cursor-pointer select-none py-0 pl-0 pr-0 bg-gray-900 hover:bg-gray-500"}
+                        onClick={()=>{navigate(`/product-overview/${product.slug}`);}}
+                      >
+                        <img
+                            src={product.coverImage}
+                            alt={product.title}
+                            className="w-10 h-12 mr-2"
+                        />
+                        <span className={`block truncate font-medium`}>
+                          {product.title}
+                        </span>
+                      </div>
+                  ))}
+
                 </div>
               </form>
             </div>

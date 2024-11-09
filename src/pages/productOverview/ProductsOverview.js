@@ -5,6 +5,7 @@ import { BooksContext } from "../../contexts/BooksProvider";
 import WishlistButton from "../../components/WishlistButton";
 import Loader from "../../components/loader/Loader";
 import { useNavigate } from "react-router-dom";
+import {getWishlist} from "../../services/wishlist-service";
 
 // Componente solamente para mostrar la imagen del libro
 const BookThumbnail = ({ imageSrc }) => (
@@ -20,7 +21,7 @@ const ProductOverview = () => {
   const navigate = useNavigate();
   const [showLoader, setShowLoader] = useState(true);
   useEffect(() => {
-    document.title = "Product Overview | The Book Flipante";
+    document.title = "Detalles del libro | The Book Flipante";
     setTimeout(() => {
       setShowLoader(false);
     }, 100);
@@ -28,8 +29,9 @@ const ProductOverview = () => {
   const {
     booksState: { booksData },fetchBooksByCategory,fetchBooksByAuthor,fetchBooksBySeries
   } = useContext(BooksContext);
-  const product = booksData.find((ele) => ele.slug === id) ?? {};
 
+  const wishList = getWishlist();
+  const product = booksData.find((ele) => ele.slug === id) ??  wishList.find(item => item.slug === id) ?? {};
   if (showLoader) return <Loader />;
 
 
@@ -87,7 +89,7 @@ const ProductOverview = () => {
                 </span>
               </div>
 
-              <p className="leading-relaxed">{product.description.replace(/<\/?[^>]+(>|$)/g, "")}</p>
+              <p className="leading-relaxed">{product.description&&product.description.replace(/<\/?[^>]+(>|$)/g, "")}</p>
 
               <div className="flex items-baseline my-4 align-top">
                 <div className="flex ml-auto">
