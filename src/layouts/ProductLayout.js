@@ -122,6 +122,7 @@ const ProductLayout = () => {
         <div className="sticky z-20 flex items-baseline justify-between pt-40 pb-8 bg-gray-900 sm:top-16 lg:top-0 md:pt-24 mb-30">
           <h1 className="font-bold tracking-tight text-gray-100 md:text-xl lg:text-4xl">
             {category||'Todos los libros'}
+            <span className="text-base text-gray-500">{` (${paging.total.toLocaleString('es-ES')})`}</span>
 
             {/*{paging &&  paging.next && <button*/}
             {/*    onClick={() => paging.next && fetchProducts(`${urlserver}/${paging.next}`)}*/}

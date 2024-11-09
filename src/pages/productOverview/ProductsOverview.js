@@ -26,7 +26,7 @@ const ProductOverview = () => {
     }, 100);
   }, []);
   const {
-    booksState: { booksData },fetchBooksByCategory,fetchBooksByAuthor
+    booksState: { booksData },fetchBooksByCategory,fetchBooksByAuthor,fetchBooksBySeries
   } = useContext(BooksContext);
   const product = booksData.find((ele) => ele.slug === id) ?? {};
 
@@ -40,6 +40,11 @@ const ProductOverview = () => {
   const handleAuthorClick = (categoryName) => {
     fetchBooksByAuthor(categoryName);
     navigate(`/products/${categoryName}`);
+  };
+
+  const handleSeriesClick = (series) => {
+    fetchBooksBySeries(series);
+    navigate(`/products/${series}`);
   };
 
   const relatedBooks = booksData.filter(book => book.slug !== product.slug);
@@ -65,20 +70,26 @@ const ProductOverview = () => {
               <h1 className="mb-1 text-3xl font-medium text-gray-100 title-font">
                 {product.title}
               </h1>
-              <div className="flex mb-4">
+              <div className="flex mb-2">
                 <span className="flex items-center">
                   <span className="text-xs mr-3 font-semibold px-2.5 py-0.5 rounded bg-cyan-900 bg-opacity-80 text-gray-100" onClick={()=>handleCategoryClick(product.categories)}>
                     {product.categories}
                   </span>
                   |
-                  <span className="ml-3 text-gray-300" onClick={()=>handleAuthorClick(product.author)}>
+                  <span className="ml-3 text-gray-300 pr-2.5 " onClick={()=>handleAuthorClick(product.author)}>
                     {product.author}
                   </span>
+                  {product.series!=='' &&
+                  <span className="text-xs mr-3 font-semi bold px-2.5 py-0.5 rounded bg-cyan-900 bg-opacity-80 text-gray-100 " onClick={()=>handleSeriesClick(product.series)}>
+                    {product.series}
+                  </span>
+                  }
                 </span>
               </div>
-              <p className="leading-relaxed">{product.description}</p>
 
-              <div className="flex items-baseline my-4">
+              <p className="leading-relaxed">{product.description.replace(/<\/?[^>]+(>|$)/g, "")}</p>
+
+              <div className="flex items-baseline my-4 align-top">
                 <div className="flex ml-auto">
                   <AddToCartButton product={product} />
                 </div>
