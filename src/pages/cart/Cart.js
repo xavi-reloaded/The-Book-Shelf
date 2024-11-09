@@ -22,7 +22,7 @@ const Cart = () => {
         <div className="rounded-lg md:w-2/3">
           {
             cart.map((product) => (
-              <CartCard key={product._id} product={product} />
+              <CartCard key={product.uid} product={product} />
             ))}
         </div>
         <CartCheckoutDetails cart={cart} />

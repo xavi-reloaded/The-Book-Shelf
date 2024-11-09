@@ -4,9 +4,10 @@ import filters from "./reducers/Filters";
 import {filtersInitialState} from "./initialStates/FilterInitialState";
 import {booksInitialState} from "./initialStates/BooksInitialState";
 import {BOOKS_ACTIONS, FILTERS_ACTION} from "../constants/dispatchTypes";
-import {updateWishlist} from "../services/localstorage-service";
+import {updateCart, updateWishlist} from "../services/localstorage-service";
 import {toast} from "react-hot-toast";
 import {addToWishlist, getWishlist, isProductInWishlist, removeFromWishlist} from "../services/wishlist-service";
+import {addToCartlist, getCartlist, postCartItem} from "../services/cart-service";
 export const BooksContext = createContext();
 
 
@@ -17,6 +18,7 @@ const BooksProvider = ({ children }) => {
   const [booksState, booksDispatch] = useReducer(books, booksInitialState);
   const [paging, setPaging] = useState({ next: null, previous: null });
   const [loading, setLoading] = useState(true);
+  const [buttonDisabled, setButtonDisable] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const { booksData, booksSearchData } = booksState;
 
@@ -27,6 +29,7 @@ const BooksProvider = ({ children }) => {
     fetchSeries();
     fetchStats();
     syncWishlistData();
+    syncCartData()
   }, []);
 
   useEffect(() => {
@@ -169,8 +172,11 @@ const BooksProvider = ({ children }) => {
         ? booksData.filter((books) =>books.title.toLowerCase().includes(searchTerm.toLowerCase()))
         : booksSearchData
   }
-
-  const syncWishlistData = async (payload) => {
+  const syncCartData = async () => {
+    const cartList = getCartlist();
+    booksDispatch({type: BOOKS_ACTIONS.SAVE_CART, payload: cartList,});
+  };
+  const syncWishlistData = async () => {
     const wishlist = getWishlist();
     booksDispatch({type: BOOKS_ACTIONS.SAVE_WISHLIST, payload: wishlist,});
   };
@@ -204,7 +210,19 @@ const BooksProvider = ({ children }) => {
     toast.error("Something Went Wrong, Try Later");
   };
 
-  const addToCartHandler = () => []
+  const addToCartHandler = async (product) => {
+    try {
+      const cartList = addToCartlist(product);
+      booksDispatch({type: BOOKS_ACTIONS.ADD_TO_CART, payload: cartList,});
+      toast.success("Added to Cart");
+      setButtonDisable(null);
+    } catch (e) {
+      setButtonDisable(null);
+      toast.error("Something Went Wrong, Try Again.");
+      console.error(e);
+      booksDispatch({type: BOOKS_ACTIONS.REMOVE_FROM_CART, payload: product.uid,});
+    }
+  };
   const removeFromCartHandler = () => []
   const moveToWishlistHandler = () => []
   const cartItemQuantityHandler = () => []
@@ -248,7 +266,8 @@ const BooksProvider = ({ children }) => {
         fetchBooksByAuthor,
         fetchAuthorList,
         fetchBooksBySeries,
-        fetchStats
+        fetchStats,
+        setButtonDisable
       }}
     >
       {children}

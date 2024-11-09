@@ -1,23 +1,42 @@
-import axios from "axios";
-import ENDPOINTS from "../constants/endpoints";
-import { DEFAULT_HEADERS } from "./auth-service";
 
-export const postCartItem = (payload) =>
-  axios.post(ENDPOINTS.CART, payload, DEFAULT_HEADERS());
-export const postCartItemInBulk = (payload) =>{
- return axios.post(ENDPOINTS.CART_BULK, payload, DEFAULT_HEADERS())}
+// Definimos la clave de almacenamiento para el wishlist en localStorage
+const CARTLIST_STORAGE_KEY = "cartlist";
 
-export const getCartItems = () => axios.get(ENDPOINTS.CART, DEFAULT_HEADERS());
+export const getCartlist = () => {
+  // Obtener la wishlist desde localStorage
+  const wishlist = localStorage.getItem(CARTLIST_STORAGE_KEY);
+  return wishlist ? JSON.parse(wishlist) : [];
+};
 
-export const deleteCartItems = (productId) =>
-  axios.delete(`${ENDPOINTS.CART}/${productId}`, DEFAULT_HEADERS());
+export const addToCartlist = (product) => {
+  // Obtener la wishlist actual
+  const wishlist = getCartlist();
+  // Comprobar si el producto ya existe para evitar duplicados
+  const productExists = wishlist.find(item => item.uid === product.uid);
+  if (!productExists) {
+    // Añadir el producto a la wishlist
+    wishlist.push(product);
+    // Guardar la nueva wishlist en localStorage
+    localStorage.setItem(CARTLIST_STORAGE_KEY, JSON.stringify(wishlist));
+  }
+  return wishlist
+};
 
+export const removeFromWishlist = (productId) => {
+  // Obtener la wishlist actual
+  const wishlist = getCartlist();
+  // Filtrar para eliminar el producto especificado por productId
+  const updatedWishlist = wishlist.filter(item => item.uid !== productId);
+  // Guardar la wishlist actualizada en localStorage
+  localStorage.setItem(CARTLIST_STORAGE_KEY, JSON.stringify(updatedWishlist));
+  return updatedWishlist;
+};
+
+export const isProductInCertlist = (productId) => {
+  const wishlist = getCartlist();
+  return wishlist.some(item => item.uid === productId);
+};
 export const changeItemQuantity = (productId, changeType) => {
-  return axios.post(
-    `${ENDPOINTS.CART}/${productId}`,
-    { action: { type: changeType } },
-    DEFAULT_HEADERS()
-  );
 };
 
 export const getTotalAmount = (payload) => {

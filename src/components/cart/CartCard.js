@@ -17,17 +17,17 @@ const CartCard = ({ product }) => {
   };
 
 
-  const { _id, imgUrl, author, price, qty, title, discount } = product;
-  const wishlisted=booksData.find(books=>books._id===_id).wishlisted
+  const { uid, coverImage, author, price, qty, title, discount } = product;
+  const wishlisted=[]
 
   return (
     <div
-      id={_id}
+      id={uid}
       className="flex flex-col justify-between p-6 mb-6 border-b border-gray-700 sm:flex-row hover:rounded-lg hover:bg-gray-800 sm:justify-start"
     >
       <img
         className="self-center w-32 h-48 sm:h-40 sm:w-18"
-        src={imgUrl}
+        src={coverImage}
         alt={title}
       />
       {/* Actions for mobile */}
@@ -73,10 +73,10 @@ const CartCard = ({ product }) => {
           </div>
           <div className="flex flex-col items-center mt-4 space-x-4 text-gray-100 sm:flex-row">
             <p className="text-xs before:mr-1 before:content-['₹'] line-through text-gray-200">
-              {price}
+              0
             </p>
             <p className="text-xl before:mr-1 before:content-['₹'] font-bold sm:text-2xl">
-              {price - discount}
+              0
             </p>
           </div>
         </div>

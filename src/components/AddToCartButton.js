@@ -19,8 +19,10 @@ const AddToCartButton = ({ product }) => {
 
   const { addedToCart, uid } = product;
   const handleAddToCart = (e, product) => {
+    return;
     e.stopPropagation();
-    if (checkForAuth()) return;
+    //if (checkForAuth()) return;
+
     if (product.addedToCart) {
       navigate("/cart");
       return;

@@ -44,9 +44,7 @@ function App() {
           <Route
             path="checkout"
             element={
-              <CanActivate>
                 <Checkout />
-              </CanActivate>
             }
           />
           <Route

@@ -21,20 +21,6 @@ export const addToWishlist = (product) => {
     return wishlist
 };
 
-export const addToWishlistInBulk = (products) => {
-    // Obtener la wishlist actual
-    const wishlist = getWishlist();
-    products.forEach(product => {
-        // Comprobar y añadir productos si no existen
-        const productExists = wishlist.find(item => item.uid === product.uid);
-        if (!productExists) {
-            wishlist.push(product);
-        }
-    });
-    // Guardar la nueva wishlist en localStorage
-    localStorage.setItem(WISHLIST_STORAGE_KEY, JSON.stringify(wishlist));
-};
-
 export const removeFromWishlist = (productId) => {
     // Obtener la wishlist actual
     const wishlist = getWishlist();
