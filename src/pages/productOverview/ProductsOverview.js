@@ -6,6 +6,7 @@ import WishlistButton from "../../components/WishlistButton";
 import Loader from "../../components/loader/Loader";
 import { useNavigate } from "react-router-dom";
 import {getWishlist} from "../../services/wishlist-service";
+import placeHolderCover from "../../assets/logo-white.png";
 
 // Componente solamente para mostrar la imagen del libro
 const BookThumbnail = ({ imageSrc }) => (
@@ -59,7 +60,7 @@ const ProductOverview = () => {
             <img
               alt={product.title}
               className="object-cover object-center w-full rounded h-1/2 lg:w-1/4"
-              src={product.coverImage}
+              src={product.coverImage===''?placeHolderCover:product.coverImage}
             />
 
             <div className="w-full mt-6 lg:w-2/3 lg:pl-10 lg:py-6 lg:mt-0">

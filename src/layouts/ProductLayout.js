@@ -10,6 +10,7 @@ import { Outlet, useParams } from "react-router-dom";
 import {BooksContext, urlserver} from "../contexts/BooksProvider";
 import { FILTERS_ACTION } from "../constants/dispatchTypes";
 import { useNavigate } from "react-router-dom";
+import placeHolderCover from "../assets/logo-white.png";
 const ProductLayout = () => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const {
@@ -198,7 +199,7 @@ const ProductLayout = () => {
                         onClick={()=>{navigate(`/product-overview/${product.slug}`);}}
                       >
                         <img
-                            src={product.coverImage}
+                            src={product.coverImage===''?placeHolderCover:product.coverImage}
                             alt={product.title}
                             className="w-10 h-12 mr-2"
                         />

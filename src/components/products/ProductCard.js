@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { BooksContext } from "../../contexts/BooksProvider";
 import AddToCartButton from "../AddToCartButton";
 import WishlistButton from "../WishlistButton";
-
+import placeHolderCover from "../../assets/logo-white.png"
 const ProductCard = ({ product, fromWishlist }) => {
   const navigate = useNavigate();
   const { removeWishlistHandler } = useContext(BooksContext);
@@ -27,7 +27,7 @@ const ProductCard = ({ product, fromWishlist }) => {
       <div className="relative">
         <img
           className="w-40 h-56 p-4 rounded-t-lg lg:w-56 lg:h-50"
-          src={coverImage}
+          src={coverImage===''?placeHolderCover:coverImage}
           alt={title}
         />
         {!fromWishlist && <WishlistButton product={product} />}

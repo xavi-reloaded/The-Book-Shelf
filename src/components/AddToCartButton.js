@@ -11,7 +11,7 @@ const AddToCartButton = ({ product }) => {
     useContext(BooksContext);
   const checkForAuth = () => {
     if (getAuth() === null) {
-      toast.error("Log in to continue.");
+      toast.error("Quieres el libro ? Pues te compras uno.");
       navigate("/login", { state: { from: location } });
       return true;
     }
