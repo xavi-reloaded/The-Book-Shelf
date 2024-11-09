@@ -58,7 +58,7 @@ const SearchBar = () => {
             <Combobox.Options className="absolute w-full py-1 mt-1 overflow-auto text-base bg-gray-900 rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
               {searchProductsHandler().length === 0 && searchTerm !== "" ? (
                 <div className="relative px-4 py-2 text-gray-100 cursor-default select-none">
-                  El libro que buscas no está en esta página.
+                  Pulsa enter para buscar el libro...
                 </div>
               ) : (
                 searchProductsHandler().map((product) => (
